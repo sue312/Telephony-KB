@@ -76,23 +76,42 @@ APN XML / database
 | APN 配了但 UI 不显示 | APN type、CarrierConfig hide list、MVNO 匹配 | 入库失败或被 AP 策略过滤，不是 modem 问题 |
 | IMS/MMS/XCAP 失败 | 是否使用了正确专用 APN | 默认 Internet APN 成功不代表专用 APN 成功 |
 <!-- CONFIG_TEMPLATE_BLOCK_END -->
-## **1、简介**
+## 专题定位
+
+APN 文档的主线只回答四件事：APN 从哪里入库、按什么条件被选中、下发给 RIL/modem 的是什么、网络侧接受还是拒绝。
+
+历史截图、字段说明和旧资料保留在“迁入资料”区，后续可复用结论应逐步沉淀到模板化定位、常见失败模式或 Case。
+
+## 主线速查
+
+| 问题 | 优先入口 |
+|---|---|
+| APN 是否存在 | `apns-conf.xml`、TelephonyProvider 数据库、APN UI |
+| APN 是否被选中 | APN type、MVNO 匹配、roaming、user_visible / user_editable |
+| 是否下发 modem | RILJ `SET_INITIAL_ATTACH_APN`、`setupDataCall`、data profile |
+| 网络是否接受 | PDN/PDP request、ESM/SM reject、MMS/IMS/XCAP 专用承载 |
+
+## 迁入资料
+
+以下内容来自历史资料迁入，适合查字段说明、旧路径、截图和案例线索；直接排障时优先使用上面的模板化定位。
+
+### 简介
 
 APN(Access Point Name)：即"接入点名称"，用来标识GPRS的业务种类，是通过手机上网时必须配置的一个参数，其决定了手机通过哪种接入方式来访问网络。
 
-## **2、需求文档**
+### 需求文档
 
 目前无需我们维护相关需求文档
 
-## **3、配置路径**
+### 配置路径
 
-### 3.1 MTK
+#### MTK
 
 APN 配置路径：alps/device/mediatek/config/apns-conf.xml
 
  ![](../attachments/outline/d84f39e6-5cf8-4803-b82b-bb667535d03f.png)
 
-### 3.2 展锐
+#### 展锐
 
 APN 配置路径：
 
@@ -105,9 +124,9 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 
  ![](../attachments/outline/73317716-c243-4f91-88e6-9d62a251b5e0.png)
 
-## **4、参数含义**
+### 参数含义
 
-### 4.1 APN分类
+#### APN分类
 
 
 1. Default APN --LTE Attach时需要携带给网络的APN类型
@@ -115,7 +134,7 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 3. SOS APN --用于承载LTE下紧急服务的APN类型
 4. XCAP APN --用于承载附加业务通过UT服务的APN类型
 
-### 4.1.1 `Account Type` 数字值和 Android `type` 字符串不要混用
+#### `Account Type` 数字值和 Android `type` 字符串不要混用
 
 从 CQWeb 历史问题 `SPCSS00746962` 看，部分 APN 需求表或功能机平台会使用 `Account Type` 数字值描述业务类型，例如：
 
@@ -134,7 +153,7 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 
 如果只说“APN type 配了 5”或“IMS APN 配了 default”，后续很容易把表格字段、Android 字段和 modem 承载类型混在一起。
 
-### 4.2 字段功能描述
+#### 字段功能描述
 
 > User：用户
 >
@@ -178,13 +197,13 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 >
 > user_visible----在APN菜单中可见
 
-### 4.3 字段与需求表对应关系（`未配置字段值则采用 TelephonyProvider.java 中设置的默认值`）
+#### 字段与需求表对应关系（`未配置字段值则采用 TelephonyProvider.java 中设置的默认值`）
 
  ![](../attachments/outline/8bf74e94-6ecc-4724-b1d2-2533d5830f28.png)
 
-## **5、如何验证**
+### 如何验证
 
-### 5.1 插白卡
+#### 插白卡
 
 用白卡写 mccmnc 及虚拟运营商 spn，查看设置中的插卡名称及接入点配置。白卡验证类型为 spn 的虚拟运营时，写卡时，需要写 spn 名称，白卡验证类型为 imsi 的虚拟运营时，写卡时，需要写匹配的 imsi。
 
@@ -192,7 +211,7 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 
 适合场景：apn 参数更新量少的情况。
 
-### 5.2 Pull文件
+#### Pull文件
 
 **1、adb pull product/etc/apns-conf.xml**
 
@@ -200,23 +219,23 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 **2、adb pull /data/user_de/0/com.android.providers.telephony**
 
 
-### 5.3 自动化工具
+#### 自动化工具
 
-## **6、加载流程**
+### 加载流程
 
-### 6.1 配置的xml是如何生效的？
+#### 配置的xml是如何生效的？
 
 > 设备开机后，终端启动phone进程，会加载运行在phone进程中的telephonyprovider负责解析apns-config.xml文件，将其中定义的APN参数写入到数据库中。
 >
 > 设备插入SIM后，设置菜单中会显示该SIM卡对应的APN菜单。这部分在ApnSettings.java中的fillList方法实现的。该方法主要根据SIM卡的mcc，mnc去查询db并将APN填入菜单中。
 
 
-### 6.2 如何做到不同卡能匹配上对应APN？（匹配逻辑）
+#### 如何做到不同卡能匹配上对应APN？（匹配逻辑）
 
 > mcc，mnc匹配
 
 
-### 6.3 虚拟运营商APN配置规则？
+#### 虚拟运营商APN配置规则？
 
 > MTK：
 >
@@ -231,7 +250,7 @@ S及之后：[alps/vendor/sprd/telephony-res/apn/apns-conf_8_v2.xml](http://192.
 > 根据 mvno_type ，mvno_match_data 自动适配虚拟运营商，无需再额外配置。
 
 
-### 6.4 设置下的显示逻辑是什么样的？
+#### 设置下的显示逻辑是什么样的？
 
 > alps/packages/apps/Settings/src/com/android/settings/network/apn/ApnSettings.java
 >
@@ -398,21 +417,21 @@ private void fillList() {
 ```
 
 
-### 6.5 APN的使用场景是？
+#### APN的使用场景是？
 
 > 可以通过apn的type来分析apn的使用场景，包括彩信，xcap，ims，sos等，选择网络的接入方式，如果配置中只配置了type的部分，那么也只支持相应的type业务。type为空则默认全部支持
 
 
-### 6.6 为什么PDN中能加载到APN配置？
+#### 为什么PDN中能加载到APN配置？
 
-## **7、常见问题**
+### 常见问题
 
-### 7.1 缺少对应APN会怎么样？（分type讨论）
+#### 缺少对应APN会怎么样？（分type讨论）
 
 > 缺少ims apn，导致无法注册ims/volte
 
 
-### 7.2 什么样的问题会排查APN配置？
+#### 什么样的问题会排查APN配置？
 
 > 数据网络业务不支持时，检查配置文件中测试卡对应 plmn 的 APN type 中是否包含 default 类型。
 >
@@ -421,7 +440,7 @@ private void fillList() {
 > UT 补充业务不支持时，检查配置文件中测试卡对应 plmn 的 APN type 字段是否包含 xcap 类型。
 
 
-### 7.3 APN中某个参数配置错误会怎么样？（分字段讨论）
+#### APN中某个参数配置错误会怎么样？（分字段讨论）
 
 > mcc、mnc：配置错误，会导致读取不到对应的配置，apn接入失败
 >
@@ -433,7 +452,7 @@ private void fillList() {
 >
 > username和password：部分apn需要输入username和password进行身份验证，如果输入错误，也会导致apn无法接入
 
-### 7.3.1 错误 APN 触发 PDN/PDP reject 怎么看
+#### 错误 APN 触发 PDN/PDP reject 怎么看
 
 从 CQWeb 历史问题 `SPCSS01428658` 看，测试方手动创建错误 APN 后，设备在 LTE 上可能收到 `PDN connectivity reject`，回落到 3G 后也可能收到 `Activate PDP context Reject`。此时要先确认 reject cause，而不是把现象笼统归为“注册不上”。
 
@@ -450,7 +469,7 @@ private void fillList() {
 3. 如果 LTE reject 后进入 3G PDP 激活流程，继续看 `Activate PDP context Request/Reject` 和 SM cause。
 4. 修改回正确 APN 后复测 data call 是否成功；成功后再判断是否需要触发 RAU/TAU 或重新建链。
 
-### 7.4 APN type 已配置但设置中不显示
+#### APN type 已配置但设置中不显示
 
 从 CQWeb 历史问题 `SPCSS01052197` 看，`apn type` 中添加 `xcap` 后不显示，不一定是 APN XML 未生效，也可能是 CarrierConfig 隐藏列表过滤。
 
@@ -468,7 +487,7 @@ KEY_HIDE_APN_TYPE_STRING_ARRAY
 3. `adb shell dumpsys carrier_config` 查看 APN type 隐藏列表。
 4. 如需在设置中显示 `xcap`，从隐藏列表或运营商覆盖配置中移除。
 
-### 7.5 AT+CGDCONT 修改 APN 后是否会自动重建 PDN？
+#### AT+CGDCONT 修改 APN 后是否会自动重建 PDN？
 
 从 CQWeb 历史问题 `SPCSS01656937` 看，`AT+CGDCONT` 只定义 PDP context/APN 参数，不负责自动释放并重建已有 PDN。若需求是“APN 变更后重新按新 APN 建链”，脚本应显式执行去激活、改 APN、重新激活。
 
@@ -490,7 +509,7 @@ AT+CFUN=1
 
 注意：不要把 `CGDCONT` 包装成隐式断链重链接口，否则 AT 语义会和标准流程混在一起，后续自动化也难判断到底验证的是 APN 定义、PDN disconnect 还是 detach。
 
-### 7.6 APN `type=wap` 显示为空是否正常？
+#### APN `type=wap` 显示为空是否正常？
 
 从 CQWeb 历史问题 `SPCSS01460052` 看，`wap` 不属于 Android 原生 APN type 枚举，因此在 APN type 一栏显示为空属于正常现象。这里要区分：
 
@@ -501,7 +520,7 @@ AT+CFUN=1
 
 处理建议：如果运营商资料写的是 WAP 接入点，通常应放在 `apn` 名称或 profile 名称中；如果要承载数据/MMS/补充业务，需要映射到 Android 支持的标准 `type`，如 `default`、`mms`、`supl`、`dun`、`ims`、`xcap` 等。
 
-### 7.7 OTA 后默认 APN 顺序异常
+#### OTA 后默认 APN 顺序异常
 
 从 CQWeb 历史问题 `SPCSS01005351` 看，OTA 前用户新增了无效 APN，OTA 后如果该无效 APN 成为默认 APN，可能导致依赖默认 APN 选择的业务异常。`apns-conf.xml` 中的数据会导入 `telephony.db` 的 `carriers` 表，历史用户 APN 与新版本预置 APN 合并时，需要关注排序和默认选择。
 
@@ -512,7 +531,7 @@ AT+CFUN=1
 3. 看默认 APN 是否被无效 APN 抢占。
 4. 必要时 OTA 后重排 APN，让系统预置可用 APN 优先，用户新增 APN 后置。
 
-### 7.8 OMA-CP APN 是否替换原始默认 APN
+#### OMA-CP APN 是否替换原始默认 APN
 
 从 CQWeb 历史问题 `SPCSS01069472` 看，运营商要求 OMA-CP 下发的 `default` 类型 APN 替换原始默认 APN 时，默认行为可能只是新增一条 APN，并保留原来的预置 APN。若需求明确是“安装 INTERNET APN 后替换 Play Internet 默认 APN”，需要实现删除或停用原始 APN 的逻辑，而不是只依赖 APN 插入。
 
@@ -531,7 +550,7 @@ OMA-CP APN：carrier / apn / type / edited / current
 preferred APN：subId / apn_id
 ```
 
-### 7.9 MMS 发送失败时先确认彩信 APN
+#### MMS 发送失败时先确认彩信 APN
 
 从 CQWeb 历史问题 `SPCSS01232418` 看，MMS 界面报 `Send failed, user not found` 不一定是号码或联系人问题，也可能是彩信发送时选错 APN。该案例中 MMS PDP 激活使用 `hos`，但实际 PDP info 指向 internet APN，随后 HTTP POST 阶段地址解析失败。
 
@@ -552,7 +571,7 @@ MMS_PARSE: SendRecvFail, send mms error!
 3. 看 PDP 激活日志里实际使用的 APN 是否为 MMS APN，而不是 default internet APN。
 4. 如果普通数据可用但 MMS 失败，优先按 MMS APN / MMSC / proxy / DNS 路由排查。
 
-### 7.10 PDN reject 是默认承载还是业务 APN 要先分清
+#### PDN reject 是默认承载还是业务 APN 要先分清
 
 从 CQWeb 索引里的 `SPCSS00802601` / `SPCSS00814493` 看，GCF/运营商测试里经常出现 `PDN Connectivity Reject on IMS APN`，典型 ESM cause 是 `#27 missing or unknown APN`。这类问题不要直接归到“LTE 注册失败”：如果 attach 和 default bearer 已成功，只是 IMS PDN 被拒，第一坏点应回到 IMS APN 名称、运营商签约、测试规范和网络侧 APN profile。
 
@@ -582,6 +601,8 @@ Attach/default bearer state:
 [全球APN归档参数表（MTK IMS参数）2025.6.17.xlsx 2459501](..\attachments\outline\files\c3491234-2b6e-4752-b87f-37273046296b_全球APN归档参数表（MTK IMS参数）2025.6.17.xlsx)
 
 ## 来源记录
+
+本节只保留来源入口；可复用结论应回填到主线速查、常见失败模式或 Case。
 
 - [APN配置](http://192.168.3.94:8888/doc/apn-bbvWSaFWEO) (`bbvWSaFWEO`)
 - [APN参数](http://192.168.3.94:8888/doc/apn-A3FatRwnyR) (`A3FatRwnyR`)

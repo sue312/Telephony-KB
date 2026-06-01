@@ -79,197 +79,81 @@ SIM / carrier id / MCCMNC / GID / SPN
 | dump 正确但业务不变 | 消费方是否读取该 key，是否还有厂商私有开关 | 第一坏点在读取链路或私有配置优先级 |
 | 换卡后仍旧值 | SIM 状态触发、缓存、subId/phoneId 映射 | 配置刷新或卡槽映射问题 |
 <!-- CONFIG_TEMPLATE_BLOCK_END -->
-## **1、简介**
+## 专题定位
 
-CarrierConfig（运营商配置）有一些项目会叫CarrierSettings，首次出现是在Android 6.0 版本中，此机制的出现就是为运营商配置定制的功能。让我们可以弃用静态配置叠加层，通过使用配置文件和指定接口向相应平台动态提供运营商配置。可配置的模块很多，如，漫游/非漫游网络、可视语音信箱、短信/彩信网络设置、VoLTE/即时通讯配置等。
+CarrierConfig / CarrierSettings 只回答一件事: 某个 key 如何被匹配、覆盖并最终生效。
 
-CarrierConfig和Settings、CellBroadcastReceiver一样，都在packages的apps中都属于系统应用。
+本文不再承载完整需求搬运或长篇平台说明。参数含义、默认值和平台覆盖情况统一看 [CarrierConfig参数映射](CarrierConfig参数映射.md)，原始资料入口看 [运营商应答资料索引](运营商应答资料索引.md)。
 
-一般情况下，我们根据运营商id或mccmnc来定位需要修改的配置文件，然后按照需求进行配置的修改。
+## 配置来源与优先级
 
-## **2、需求文档**
+| 来源 | 常见落点 | 说明 |
+|---|---|---|
+| AOSP 默认配置 | `packages/apps/CarrierConfig` 或平台默认 XML | 提供基线默认值 |
+| 运营商覆盖 | `carrier_config_carrierid_*.xml` / `carrier_config_mccmnc_*.xml` | 按 Carrier ID、MCC/MNC 命中 |
+| 厂商覆盖 | `vendor.xml` / `vendor_ex.xml` / 项目 overlay | 后加载者覆盖同名 key |
+| CarrierService 动态加载 | `CarrierConfigLoader` / `DefaultCarrierConfigService` | 以运行时 bundle 为准 |
 
-[IMS Requirements for Region_v19.6_20241113.xlsx 154686](..\attachments\outline\files\ace56609-5b78-4860-bd95-36e2a01ad99e_IMS Requirements for Region_v19.6_20241113.xlsx)
+### 常见目录
 
-## **3、配置路径**
+| 平台 | 常见目录 |
+|---|---|
+| MTK | `vendor/mediatek/proprietary/packages/apps/CarrierConfig/assets`、`.../res/xml` |
+| UNISOC | `vendor/sprd/platform/packages/apps/CarrierConfig/assets`、`.../res/xml` |
 
-vendor厂商配置文件优先级高于AOSP默认配置文件
+## 匹配与生效链路
 
-### MTK
+```text
+SIM / carrier id / MCCMNC / GID / SPN / IMSI
+-> CarrierConfigLoader / DefaultCarrierConfigService
+-> 选择 carrierid 或 mccmnc 配置
+-> 合并 vendor / vendor_ex / overlay
+-> framework / IMS / Data / UI 读取
+-> dumpsys carrier_config 验证
+```
 
-carrier_config_carrierid_x(Carrier-ID)_xx(operator name)：
-/alps/vendor/mediatek/proprietary/packages/apps/CarrierConfig/assets
+## 配置写法
 
-carrier_config_mccmnc_xx(mccmnc value)：
-
-/alps/vendor/mediatek/proprietary/packages/apps/CarrierConfig/assets
-
-vendor_ex.xml：
-
-/alps/vendor/mediatek/proprietary/packages/apps/CarrierConfig/res/xml
-
-### 展锐
-
-carrier_config_carrierid_x(Carrier-ID)_xx(operator name)：
-/SPRDROID13_VND_RLS_23A/system/A15/alps/vendor/sprd/platform/packages/apps/CarrierConfig/assets
-
-carrier_config_mccmnc_xx(mccmnc value)：
-
-/SPRDROID13_VND_RLS_23A/system/A15/alps/vendor/sprd/platform/packages/apps/CarrierConfig/assets
-
-vendor_ex.xml：
-
-/SPRDROID13_VND_RLS_23A/system/A15/alps/vendor/sprd/platform/packages/apps/CarrierConfig/res/xml
-
-## **4、配置说明**
-
-### 优先级/配置文件选择
-
-DefaultCarrierConfigService.java介绍了各配置文件的优先级
-
-通过遍历assets目录，按SpecificCarrierId>CarrierId>mccmncCarrierId优先级依次查找对应配置文件。即优先使用 Specific Carrier ID（针对 MVNO 或子运营商），其次是通用 Carrier ID，最后是 MCC+MNC 回退的 Carrier ID
-
- ![](../attachments/outline/40207201-f49f-4f00-9540-cf58259e4f09.png)
-
-但是存在配置覆盖的现象，当所有运营商配置加载完成后，随后强制合并平台方的配置文件，并覆盖同名属性的配置。先加载vendor.xml，后加载vendor_ex.xml
-
-// 1. 先加载 assets/ 中的配置（CarrierID/MCCMNC）和 vendor.xml
-
- ![](../attachments/outline/be09629c-2425-4c04-b2b8-0212ed2c9708.png)
-
-//最后加载 vendor_ex.xml。先通过id查找vendor_ex.xml，然后解析vendor_ex.xml并合并到config，覆盖所有同名配置项
-
- ![](../attachments/outline/d93355af-8381-4431-b0f2-1339436fef26.png)
-
-### 运营商配置要求
-
-carrier_config_carrierid_xx_xx.xml：
-
+```xml
 <carrier_config>
-
-   <boolean name="carrier_wfc_ims_available_bool" value="true"/>
-
-   <int name="carrier_default_wfc_ims_mode_int" value="1"/>
-
-   <string name="key_oem_pref_network_mode">1,0,0,1,1,1</string>
-
+  <boolean name="carrier_wfc_ims_available_bool" value="true"/>
+  <int name="carrier_default_wfc_ims_mode_int" value="1"/>
+  <string name="key_oem_pref_network_mode">1,0,0,1,1,1</string>
 </carrier_config>
+```
 
-carrier_config_mccmnc_xx.xml：与上面格式一致
+同一 key 的目标值如果与当前分支默认值一致，通常不写入运营商 XML，避免无意义覆盖。
 
-### `key_oem_pref_network_mode` 注意事项
+## `key_oem_pref_network_mode`
 
-`key_oem_pref_network_mode` 不只是控制 Settings 下可见的网络模式。部分项目逻辑会在首次插卡或 CarrierConfig 更新后，调用 `updateOemAllowedNetworkMode()` 并触发 `TelephonyManager.setPreferredNetworkType()`，最终下发 modem workmode。
+这个 key 不只是控制 Settings 里可见的网络模式。部分项目会在插卡或 CarrierConfig 更新后触发 `updateOemAllowedNetworkMode()`，再调用 `setPreferredNetworkType()`，最终影响 modem workmode 和 UE Capability 上报。
 
-典型影响链路：
+典型链路：
 
 ```text
 key_oem_pref_network_mode
 -> updateOemAllowedNetworkMode()
 -> setPreferredNetworkType()
--> AT+SPTESTMODEM
--> UECapabilityInformation 中 RAT 能力变化
+-> modem workmode
+-> UECapabilityInformation
 ```
 
-如果配置为只允许 4G/3G，后续 LTE 能力上报可能不再携带 GSM/2G。遇到运营商实验室反馈 UE Capability 不符合预期时，要同时查 CarrierConfig、`AT+SPTESTMODEM` 和空口 `UECapabilityInformation`。
+遇到“UI 看起来对了，但空口能力不对”的问题，要同时查 CarrierConfig、AP 日志和 modem trace。
 
-参考案例：[[../40_Case-Library/Registration/2025-07-16_Registration_UNISOC_UECapability缺少2G能力_网络模式客制化]]。
+## 新建配置文件
 
+- MTK: 优先用 MCF Tool 生成，再按项目目录补充。
+- UNISOC: 参考同类运营商文件命名和结构，新建 XML 后按 carrier id / mccmnc 放入对应目录。
 
-### vendor(同vendor_ex)配置要求
+## 验证方式
 
-carrier_config_list中包含所有运营商的配置，若需修改配置请在指定mccmnc下完成
+1. 确认 key 存在于目标分支 `CarrierConfigManager.java`。
+2. 确认 SIM 的 MCC/MNC、Carrier ID、GID、SPN、IMSI 命中预期配置。
+3. 查看 `adb shell dumpsys carrier_config`。
+4. 对照 Telephony / IMS / Data 日志确认消费方已读取。
+5. 必要时回看 [CarrierConfig参数映射](CarrierConfig参数映射.md) 的平台覆盖和默认值。
 
-格式如下：
-
-<carrier_config_list>
-
-   <carrier_config mcc="xxx(国家码)" mnc="xx(网络码)">
-
-   <boolean name="属性名" value="true or false(bool类型)" />
-
-   <int name="属性名" value="0,1,2...(数值型数据)" />
-
-   </carrier_config>
-
-...
-
-</carrier_config_list>
-
-Ex：
-
-<carrier_config_list>
-
-   <carrier_config mcc="259" mnc="15">
-
-   <boolean name="carrier_volte_available_bool" value="true" />
-
-   <int name="carrier_default_wfc_ims_mode_int" value="1" />
-
-   </carrier_config>
-
-...
-
-</carrier_config_list>
-
-### 新建XML配置文件
-
-**MTK**
-
-建议使用MTK MCF Tool工具创建，详细操作步骤如下：
-[MCF TOOL使用说明](http://192.168.3.94:8888/doc/mcf-tool-VceB7oPtEp)
-
-**展锐**
-
-参考其它运营商文件格式(命名格式和内容格式)，新建一个xml文件
-
-### 参数功能介绍
-
-参数含义、默认值和平台覆盖情况统一维护在 [CarrierConfig参数映射](CarrierConfig参数映射.md)。修改前先确认目标 key 存在于当前分支 `CarrierConfigManager.java`，再确认运营商 XML 匹配条件和运行时 `dumpsys carrier_config` 生效值。
-
-
-### 自定义键值对如何
-
-
-## 5、如何验证
-
-### 写白卡要求
-
-GRSIMWrite------用于修改白卡MCCMNC、SPN、ICCID等
-
-工具路径：\\\\\\\\192.168.3.127\\127\\13_Test\\02_Tools\\01-common\\01-MCCMNC写卡软件
-
- ![](../attachments/outline/102295dc-42e1-4647-832b-9068fe986e3b.png)
-
- ![](../attachments/outline/f5fe627c-57f2-46a8-b465-d23f2f53a693.png)
-
-### 查看菜单
-
-不同配置菜单对应位置
-
-例如ims相关配置可在以下路径验证：设置--网络--sim。在该页面下会显示volte、vowifi、vilte等选项
-
-### ADB命令读取
-
-所有值通过CarrierConfigManager读取
-
-查看sim对业务的支持状态：adb shell dumpsys carrier_config
-
-查看sim指定业务的支持状态：adb shell dumpsys carrier_config | grep "业务属性名"
-
-### 卡模拟
-
-
-## 6、常见问题
-
-### 加载慢问题
-
-
-### 对应KEY逻辑位置整理
-
-[CC键值对逻辑整理](http://192.168.3.94:8888/doc/cc-wzlRpYy4TR)
-
-## 7、历史问题速查
+## 历史问题速查
 
 | 场景 | 关键配置/代码 | 排查点 |
 |---|---|---|
@@ -285,7 +169,17 @@ GRSIMWrite------用于修改白卡MCCMNC、SPN、ICCID等
 - [[../40_Case-Library/Data/2022-10-31_Data_UNISOC_APN_XCAP类型被隐藏]]
 - [[../40_Case-Library/Data/2024-11-13_Data_UNISOC_MMS大小限制CarrierConfig]]
 
+## 资料索引
+
+| 资料 | 用途 |
+|---|---|
+| [CC键值对逻辑整理](http://192.168.3.94:8888/doc/cc-wzlRpYy4TR) | 旧逻辑整理入口，结论需要回填到参数映射或案例 |
+| [CarrierConfig参数映射](CarrierConfig参数映射.md) | key、默认值、平台覆盖和分组索引 |
+| [UNISOC-CarrierService启动与CarrierConfig加载流程](UNISOC-CarrierService启动与CarrierConfig加载流程.md) | UNISOC 加载链路和日志断点 |
+
 ## 来源记录
+
+本节只保留来源入口；可复用结论应回填到参数映射、资料索引或 Case。
 
 - [CarrierConfig配置](http://192.168.3.94:8888/doc/carrierconfig-Q1I6HioHAA) (`Q1I6HioHAA`)
 - [CarrierConfig架构](http://192.168.3.94:8888/doc/carrierconfig-O1eCwlVdF9) (`O1eCwlVdF9`)

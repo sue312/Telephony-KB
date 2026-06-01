@@ -13,7 +13,7 @@ quality: curated
 - 定位时必须同时保留三类证据：配置文件、运行时 dump、log 中最终生效值。
 - 本文图片已转成本地附件；非图片附件仍保留原 Outline 链接作为资料索引。
 
-这里集中放“配置从哪里来、如何匹配、在哪一层生效、失败时怎么验证”。业务流程只链接配置影响点，不重复配置细节。
+这里集中放“配置从哪里来、如何匹配、在哪一层生效、失败时怎么验证”。业务流程只链接配置影响点，不重复配置细节。CarrierConfig、APN、ECC、IMS、NV、卫星通信、运营商名称等专题都应保持这种入口化写法。
 
 ## 统一写法
 
@@ -25,15 +25,15 @@ quality: curated
 4. 验证必须同时包含源配置、运行时 dump、AP/vendor 下发、modem/协议采用。
 5. 常见失败和关联案例放在文档后半段，主流程只链接，不重复展开。
 
-## 模板化覆盖范围
+## 已覆盖范围
 
-当前 `60_Configuration` 的主配置文档已经统一补充“模板化定位”区块，用于快速回答四个问题：配置来自哪里、如何匹配生效、怎么验证、失败时先查哪一层。
+当前主配置文档已统一补了“模板化定位”区块。读文档时先看入口，再看细节。
 
-| 类型 | 已覆盖文档 | 维护要求 |
-|---|---|---|
-| 主配置方法 | APN、CarrierConfig、ECC、NV、运营商名称、IMS、SMS、SIMLock、补充业务、小区广播、User-Agent、网络制式图标、卫星通信 | 入口先给结论和证据链，细节表放后半段 |
-| 平台/加载链路 | UNISOC CarrierService 启动与 CarrierConfig 加载流程 | 说明启动入口、运行时 dump、读取方和常见断点 |
-| 参数映射/资料索引 | CarrierConfig 参数映射、Modem NV 参数映射、配置与客户定制、运营商应答资料索引 | 只做入口和读法，不在主文档重复承载全量字段 |
+| 类型 | 文档 |
+|---|---|
+| 主配置方法 | APN、CarrierConfig、ECC、NV、运营商名称、IMS、SMS、SIMLock、补充业务、小区广播、User-Agent、网络制式图标、卫星通信 |
+| 平台/加载链路 | UNISOC CarrierService 启动与 CarrierConfig 加载流程 |
+| 参数映射/资料索引 | CarrierConfig 参数映射、Modem NV 参数映射、配置与客户定制、运营商应答资料索引 |
 
 如需重新生成这些区块，运行：
 
@@ -89,3 +89,7 @@ PowerShell -ExecutionPolicy Bypass -File F:\Codex\Knowledge\Telephony-KB\70_Tool
 | 配置导致的真实问题证据链 | `40_Case-Library` |
 | 配置影响某个业务步骤 | 在 `20_Service-Flows` 中链接到这里 |
 | 平台代码读取配置的位置 | `50_Platform-Code` |
+
+## 来源记录
+
+文档尾部如果需要保留来源记录，尽量只放原始入口，不把结论再写一遍。结论回填到对应专题页或 Case。

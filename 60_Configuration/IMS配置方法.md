@@ -73,6 +73,25 @@ quality: curated
 | SIP 403 | IMEI/签约/P-CSCF/realm/profile | 网络拒绝和本地配置要用 SIP response 区分 |
 | VoWiFi 不注册 | IKE/ePDG、Wi-Fi 网络、IMS profile | 没有 IKE 证据时不直接判 SIP |
 <!-- CONFIG_TEMPLATE_BLOCK_END -->
+## 专题定位
+
+IMS 文档主线只回答四件事：能力门控是否放行、IMS PDN 是否建立、SIP / IKE 是否成功、失败时先查哪一层。
+
+本文保留 MTK SBP / CXP、VoWiFi IKE、SIP 403 等历史证据；可复用结论优先沉淀到 `40_Case-Library`、平台代码入口或专题下的常见失败模式。
+
+## 主线速查
+
+| 问题 | 优先入口 |
+|---|---|
+| 能力是否放行 | CarrierConfig、IMS profile、Settings 开关 |
+| IMS PDN 是否起来 | APN、P-CSCF、IMC 条件、SBP / DSBP / CXP |
+| SIP / IKE 是否成功 | SIP REGISTER、IKE/ePDG、IMS trace |
+| 失败先查哪层 | 网络签约、运营商支持状态、modem profile、AP 日志 |
+
+## 迁入资料
+
+以下内容保留平台差异、关键日志和操作边界，适合追溯和复核。
+
 ## IMS注册配置分层
 
 | 层级 | 检查项 | 典型证据 |
@@ -199,4 +218,3 @@ VoWiFi: IKE / ePDG / Wi-Fi 环境
 - [[../40_Case-Library/IMS/Imported_IMS_02_Iran_无法注册IMS问题]]
 - [[../40_Case-Library/IMS/Imported_IMS_03_6032+_Spark反馈WFC注册有问题]]
 - [[../40_Case-Library/IMS/2025-07-29_IMS_SMS-over-IP配置缺失]]
-
