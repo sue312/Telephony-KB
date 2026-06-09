@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: config
 domain: Configuration
 status: active
@@ -12,7 +12,7 @@ layer: AP/Modem/Build/NV
 
 ## 阅读入口
 
-这篇回答 SIMLock / 锁网怎么配置、怎么确认生效、第一坏点怎么切。真实问题样例看 [SIMLock锁网不生效：产物错误](../40_Case-Library/Registration/2025-W21_Registration_SIMLock锁网不生效_产物错误.md) 和 [SimLock锁卡状态MCCMNC为空](../40_Case-Library/SIM/2024-04-12_SIM_UNISOC_SimLock锁卡状态MCCMNC为空.md)。
+这篇回答 SIMLock / 锁网怎么配置、怎么确认生效、第一坏点怎么切。真实问题样例看 [SIMLock锁网不生效：产物错误](../../40_Case-Library/Registration/2025-W21_Registration_SIMLock锁网不生效_产物错误.md) 和 [SimLock锁卡状态MCCMNC为空](../../40_Case-Library/SIM/2024-04-12_SIM_UNISOC_SimLock锁卡状态MCCMNC为空.md)。
 
 
 <!-- CONFIG_TEMPLATE_BLOCK_START -->
@@ -58,10 +58,10 @@ layer: AP/Modem/Build/NV
 
 | 入口 | 用途 |
 |---|---|
-| [配置目录 README](README.md) | 回到配置分类和放置规则 |
-| [Case横向索引](../40_Case-Library/Case横向索引.md) | 查历史同类问题和第一坏点 |
-| [平台代码入口](../50_Platform-Code/README.md) | 查厂商代码读取位置 |
-| [常用命令](../70_Tools-Debug/Commands/常用命令.md) | 查 dumpsys、logcat 和 adb 命令 |
+| [配置目录 README](../README.md) | 回到配置分类和放置规则 |
+| [Case横向索引](../../40_Case-Library/Case横向索引.md) | 查历史同类问题和第一坏点 |
+| [平台代码入口](../../50_Platform-Code/README.md) | 查厂商代码读取位置 |
+| [常用命令](../../70_Tools-Debug/Commands/常用命令.md) | 查 dumpsys、logcat 和 adb 命令 |
 
 ### 常见失败模式
 

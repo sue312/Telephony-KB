@@ -295,8 +295,8 @@ Modem/网络侧证据显示 xxx。
 
 | 场景 | 第一证据 | 配置入口 |
 |---|---|---|
-| Call Forwarding / Call Barring 查询或设置 | `AT+CCFC(U)`、SS domain decision、XCAP HTTP | [XCAP URL与AUID](../../60_Configuration/补充业务配置方法.md#XCAP-URL与ss_XcapAuid) |
-| USSD code 失败 | `AT+ECUSD/EIUSD`、SIP 403、CISS REGISTER/FACILITY | [USSD域选](../../60_Configuration/补充业务配置方法.md#USSD域选) |
+| Call Forwarding / Call Barring 查询或设置 | `AT+CCFC(U)`、SS domain decision、XCAP HTTP | [XCAP URL与AUID](../../60_Configuration/Business-Config/补充业务配置方法.md#XCAP-URL与ss_XcapAuid) |
+| USSD code 失败 | `AT+ECUSD/EIUSD`、SIP 403、CISS REGISTER/FACILITY | [USSD域选](../../60_Configuration/Business-Config/补充业务配置方法.md#USSD域选) |
 | XCAP 失败后 CSFB | HTTP 400/403、PDN reject、`EXTENDED_SERVICE_REQUEST` | 先查 XCAP URL/APN/签约，再看 CSFB |
 
 ### 补充业务流程

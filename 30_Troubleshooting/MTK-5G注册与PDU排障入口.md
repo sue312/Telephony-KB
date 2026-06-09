@@ -124,5 +124,5 @@ S-NSSAI
 - [NR注册流程](../20_Service-Flows/Network-Registration/NR注册流程.md)
 - [注册失败排障流程](注册失败排障流程.md)
 - [数据业务失败排障流程](数据业务失败排障流程.md)
-- [APN配置方法](../60_Configuration/APN配置方法_重构.md)
+- [APN配置方法](../60_Configuration/Core-Config/APN配置方法_重构.md)
 - [MTK-配置关系与生效链路](../60_Configuration/MTK-配置关系与生效链路.md)

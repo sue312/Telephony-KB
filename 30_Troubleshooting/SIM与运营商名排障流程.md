@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: triage
 domain: Troubleshooting
 status: active
@@ -10,7 +10,7 @@ search_tier: main_entry
 
 ## 阅读入口
 
-SIM 初始化主流程看 [SIM业务流程](../20_Service-Flows/SIM/SIM业务流程.md)，EF 文件含义看 [SIM-USIM-EF文件速查](../10_Basics/SIM-USIM-EF文件速查.md)，运营商名称配置看 [运营商名称配置方法](../60_Configuration/运营商名称配置方法.md)。
+SIM 初始化主流程看 [SIM业务流程](../20_Service-Flows/SIM/SIM业务流程.md)，EF 文件含义看 [SIM-USIM-EF文件速查](../10_Basics/SIM-USIM-EF文件速查.md)，运营商名称配置看 [运营商名称配置方法](../60_Configuration/Business-Config/运营商名称配置方法.md)。
 
 ## SIM 不识别
 

@@ -33,7 +33,7 @@ source: 运营商配置参考.xlsx; CarrierConfigManager.java
 ```text
 业务现象
 -> 本文定位 CarrierConfig key 分组
--> 同目录分组表查字段
+-> References/CarrierConfig 查字段
 -> 对应配置方法文档验证生效链路
 ```
 

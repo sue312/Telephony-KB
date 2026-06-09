@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: config
 domain: Configuration
 status: active
@@ -62,10 +62,10 @@ App / Dialer / SMS provider
 
 | 入口 | 用途 |
 |---|---|
-| [配置目录 README](README.md) | 回到配置分类和放置规则 |
-| [Case横向索引](../40_Case-Library/Case横向索引.md) | 查历史同类问题和第一坏点 |
-| [平台代码入口](../50_Platform-Code/README.md) | 查厂商代码读取位置 |
-| [常用命令](../70_Tools-Debug/Commands/常用命令.md) | 查 dumpsys、logcat 和 adb 命令 |
+| [配置目录 README](../README.md) | 回到配置分类和放置规则 |
+| [Case横向索引](../../40_Case-Library/Case横向索引.md) | 查历史同类问题和第一坏点 |
+| [平台代码入口](../../50_Platform-Code/README.md) | 查厂商代码读取位置 |
+| [常用命令](../../70_Tools-Debug/Commands/常用命令.md) | 查 dumpsys、logcat 和 adb 命令 |
 
 ### 常见失败模式
 
@@ -105,7 +105,7 @@ MTK 平台上，SMS over IMS 不是单一开关。至少要形成下面的闭环
 日志中 SDM 命中 SGs 优先或 SMS over IP disabled，第一坏点在运营商域选配置，不是 SMSC 或应用发送。
 ```
 
-参考案例：[[../40_Case-Library/IMS/2025-07-29_IMS_SMS-over-IP配置缺失]]。
+参考案例：[[../../40_Case-Library/IMS/2025-07-29_IMS_SMS-over-IP配置缺失]]。
 
 ## SMSC来源与FDN边界
 
@@ -155,7 +155,7 @@ RILJ: SEND_SMS
 | 权限和确认弹框 | 是否被用户确认、策略拦截或本地白名单绕过 |
 | 本地修改 | 是否改过 `SMSDispatcher` 对 `SmsTracker` 的处理 |
 
-参考案例：[[../40_Case-Library/SMS/2025-03-22_SMS_UNISOC_短码发送未到RILJ_SEND_SMS]]。
+参考案例：[[../../40_Case-Library/SMS/2025-03-22_SMS_UNISOC_短码发送未到RILJ_SEND_SMS]]。
 
 ## Voicemail号码
 
@@ -177,7 +177,7 @@ RILJ: SEND_SMS
 
 ## 关联案例
 
-- [[../40_Case-Library/SMS/2024-03-11_SMS_UNISOC_FDN发送短信需同时放行SMSC和收件人]]
-- [[../40_Case-Library/SMS/2025-03-22_SMS_UNISOC_短码发送未到RILJ_SEND_SMS]]
-- [[../40_Case-Library/IMS/2025-07-29_IMS_SMS-over-IP配置缺失]]
-- [[../40_Case-Library/SIM/2026-02-27_SIM_UNISOC_PLMN列表与SIM短信参数能力确认]]
+- [[../../40_Case-Library/SMS/2024-03-11_SMS_UNISOC_FDN发送短信需同时放行SMSC和收件人]]
+- [[../../40_Case-Library/SMS/2025-03-22_SMS_UNISOC_短码发送未到RILJ_SEND_SMS]]
+- [[../../40_Case-Library/IMS/2025-07-29_IMS_SMS-over-IP配置缺失]]
+- [[../../40_Case-Library/SIM/2026-02-27_SIM_UNISOC_PLMN列表与SIM短信参数能力确认]]

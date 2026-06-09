@@ -87,4 +87,4 @@ if (simState == TelephonyManager.SIM_STATE_PUK_REQUIRED
 ## 关联入口
 
 - [[../../20_Service-Flows/Network-Registration/网络模式更新流程]]
-- [[../../60_Configuration/CarrierConfig配置方法_重构]]
+- [[../../60_Configuration/Core-Config/CarrierConfig配置方法_重构]]

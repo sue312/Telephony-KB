@@ -143,7 +143,17 @@ function Add-CommonTemplateSections {
   $platformCodeLink = '../50_Platform-Code/README.md'
   $toolsLink = '../70_Tools-Debug/Commands/常用命令.md'
 
-  if (-not [string]::IsNullOrWhiteSpace($Path) -and $Path -like '60_Configuration/References/*') {
+  if (-not [string]::IsNullOrWhiteSpace($Path) -and $Path -like '60_Configuration/Core-Config/*') {
+    $configReadmeLink = '../README.md'
+    $caseIndexLink = '../../40_Case-Library/Case横向索引.md'
+    $platformCodeLink = '../../50_Platform-Code/README.md'
+    $toolsLink = '../../70_Tools-Debug/Commands/常用命令.md'
+  } elseif (-not [string]::IsNullOrWhiteSpace($Path) -and $Path -like '60_Configuration/Business-Config/*') {
+    $configReadmeLink = '../README.md'
+    $caseIndexLink = '../../40_Case-Library/Case横向索引.md'
+    $platformCodeLink = '../../50_Platform-Code/README.md'
+    $toolsLink = '../../70_Tools-Debug/Commands/常用命令.md'
+  } elseif (-not [string]::IsNullOrWhiteSpace($Path) -and $Path -like '60_Configuration/References/*') {
     $configReadmeLink = '../../README.md'
     $caseIndexLink = '../../../40_Case-Library/Case横向索引.md'
     $platformCodeLink = '../../../50_Platform-Code/README.md'
@@ -190,15 +200,15 @@ function Update-ConfigDoc {
   )
 
   if ([string]::IsNullOrWhiteSpace($Path)) {
-    $path = Join-Path $configDir $Name
+    $docPath = Join-Path $configDir $Name
   } else {
-    $path = Join-Path $Root $Path
+    $docPath = Join-Path $Root $Path
   }
-  if (-not (Test-Path -LiteralPath $path)) {
-    throw "Config doc not found: $path"
+  if (-not (Test-Path -LiteralPath $docPath)) {
+    throw "Config doc not found: $docPath"
   }
 
-  $text = [System.IO.File]::ReadAllText($path, [System.Text.Encoding]::UTF8)
+  $text = [System.IO.File]::ReadAllText($docPath, [System.Text.Encoding]::UTF8)
   $Block = Add-CommonTemplateSections -Name $Name -Path $Path -Block $Block
   $wrappedBlock = "`n$markerStart`n$Block`n$markerEnd`n"
 
@@ -219,20 +229,21 @@ function Update-ConfigDoc {
     } else {
       $h1 = [regex]::Match($text, '(?m)^#\s+.+$')
       if (-not $h1.Success) {
-        throw "No insertion point found: $path"
+        throw "No insertion point found: $docPath"
       }
       $insertAt = $h1.Index + $h1.Length
       $newText = $text.Insert($insertAt, $wrappedBlock)
     }
   }
 
-  [System.IO.File]::WriteAllText($path, $newText, $utf8NoBom)
+  [System.IO.File]::WriteAllText($docPath, $newText, $utf8NoBom)
   Write-Host "Normalized: $Name"
 }
 
 $docs = @(
   @{
     Name = 'APN配置方法_重构.md'
+    Path = '60_Configuration/Core-Config/APN配置方法_重构.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -267,6 +278,7 @@ $docs = @(
   },
   @{
     Name = 'CarrierConfig配置方法_重构.md'
+    Path = '60_Configuration/Core-Config/CarrierConfig配置方法_重构.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -300,6 +312,7 @@ $docs = @(
   },
   @{
     Name = 'ECC配置方法_重构.md'
+    Path = '60_Configuration/Core-Config/ECC配置方法_重构.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -333,6 +346,7 @@ $docs = @(
   },
   @{
     Name = 'NV参数配置.md'
+    Path = '60_Configuration/Core-Config/NV参数配置.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -366,6 +380,7 @@ $docs = @(
   },
   @{
     Name = '运营商名称配置方法.md'
+    Path = '60_Configuration/Business-Config/运营商名称配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -494,6 +509,7 @@ $docs = @(
   },
   @{
     Name = 'SMS配置方法.md'
+    Path = '60_Configuration/Business-Config/SMS配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -527,6 +543,7 @@ $docs = @(
   },
   @{
     Name = 'SIMLock配置方法.md'
+    Path = '60_Configuration/Business-Config/SIMLock配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -559,6 +576,7 @@ $docs = @(
   },
   @{
     Name = '补充业务配置方法.md'
+    Path = '60_Configuration/Business-Config/补充业务配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -591,6 +609,7 @@ $docs = @(
   },
   @{
     Name = '小区广播配置方法.md'
+    Path = '60_Configuration/Business-Config/小区广播配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -621,6 +640,7 @@ $docs = @(
   },
   @{
     Name = 'User-Agent配置方法.md'
+    Path = '60_Configuration/Business-Config/User-Agent配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -651,6 +671,7 @@ $docs = @(
   },
   @{
     Name = '网络制式图标配置方法.md'
+    Path = '60_Configuration/Business-Config/网络制式图标配置方法.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',
@@ -681,6 +702,7 @@ $docs = @(
   },
   @{
     Name = '卫星通信配置.md'
+    Path = '60_Configuration/Business-Config/卫星通信配置.md'
     Block = (Join-Lines -Lines @(
       '## 模板化定位',
       '',

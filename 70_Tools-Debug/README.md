@@ -21,11 +21,18 @@ search_tier: main_entry
 | 文档 | 用途 |
 |---|---|
 | [常用命令](Commands/常用命令.md) | adb、logcat、dumpsys、telephony / phone / ims / carrier_config 状态 |
-| [场测Log抓取SOP](Log-Capture/场测Log抓取SOP.md) | AP、modem、bugreport 抓取规范 |
 | [MTK网络通信问题抓Log与提交模板](Log-Capture/MTK-网络通信问题抓Log与提交模板.md) | MTK 注册、IMS/WFC、Data、MMS/CB、Call、RRC、SIM/AT 等问题的 log 包和 eService 描述模板 |
+| [MTK-DebugLogger抓LogSOP](Log-Capture/MTK-DebugLogger抓LogSOP.md) | MTK DebugLoggerUI 普通问题和网络问题抓 log 步骤 |
+| [UNISOC-Ylog抓LogSOP](Log-Capture/UNISOC-Ylog抓LogSOP.md) | 展锐 Ylog AP / Modem / Connectivity log 抓取步骤 |
+| [Kali-WiFi-Sniffer抓包SOP](Log-Capture/Kali-WiFi-Sniffer抓包SOP.md) | Kali + Wireshark 抓 Wi-Fi / Wi-Fi 6E 空口包 |
 | [Log分析方法](Log-Analysis/Log分析方法.md) | Android AP 侧 log 和 modem trace 通用分析方法 |
 | [LTE注册-平台Log速查](Log-Analysis/LTE注册-平台Log速查.md) | LTE 注册平台 log 字段和关键模块 |
-| [Log工具使用补充](Log-Analysis/Log工具使用补充.md) | ELT、Logel、Wireshark 使用方法补充 |
+| [UNISOC-Logel工具使用SOP](Log-Analysis/UNISOC-Logel工具使用SOP.md) | 展锐 Logel 回放 modem log、搜索、图表和 full dump |
+| [Wireshark-SIP与抓包分析SOP](Log-Analysis/Wireshark-SIP与抓包分析SOP.md) | Wireshark 打开 cap、查看 SIP 和基础抓包分析 |
+| [SpeechAnalyzer音频日志分析SOP](Tools/SpeechAnalyzer音频日志分析SOP.md) | MTK 通话 VM 音频文件解析和 UL/DL 第一坏点判断 |
+| [MTK-META参数导入导出SOP](Tools/MTK-META参数导入导出SOP.md) | MTK META UpdateParameter Tool 参数备份、导出、导入 |
+| [UNISOC-NVTool差分NV导入SOP](Tools/UNISOC-NVTool差分NV导入SOP.md) | 展锐 Pandora 进校准模式、NVTool 读取和导入差分 NV |
+| [专项调试技巧](Debug-Tips/README.md) | 刷机、锁小区、信号强度、实时 modem log、校准参数、IKE 解密、FCC B40 验证 |
 | [[知识库维护工具]] | Case 横向索引、配置文档模板化、导入资料治理、Markdown 健康检查脚本和 HTML 同步导出 |
 
 ## 参考资料
@@ -34,9 +41,8 @@ search_tier: main_entry
 
 | 文档 | 用途 |
 |---|---|
-| [Catch Log补充](Log-Capture/Catch-Log补充.md) | MTK/UNISOC/Qualcomm/Wi-Fi sniffer 抓取资料 |
-| [通信工具使用补充](Tools/通信工具使用补充.md) | SpeechAnalyzer、GRSIMWrite、META、MCF 等工具资料 |
-| [调试技巧补充](Debug-Tips/调试技巧补充.md) | 锁小区、信号强度、IKE 解密、实时 modem log 等调试技巧 |
+| [通信工具使用补充](Tools/通信工具使用补充.md) | 通信工具导入合集拆分入口和来源索引 |
+| [GRSIMWrite白卡工具资料索引](Tools/GRSIMWrite白卡工具资料索引.md) | GRSIMWrite 白卡工具附件入口 |
 
 ## 目录说明
 

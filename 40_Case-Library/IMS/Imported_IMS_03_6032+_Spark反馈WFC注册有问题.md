@@ -65,5 +65,5 @@ MSG_ID_CMCP_HANDOVER_TO_VOWIFI_RSP
 
 - [[../../20_Service-Flows/IMS/IMS业务流程#VoWiFi注册流程]]
 - [[../../60_Configuration/IMS配置方法#VoWiFi-IKE配置]]
-- [[../../70_Tools-Debug/Debug-Tips/调试技巧补充#IKE消息解密]]
+- [IKE消息解密SOP](../../70_Tools-Debug/Debug-Tips/IKE消息解密SOP.md)
 

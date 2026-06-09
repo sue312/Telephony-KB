@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: concept
 domain: Basics
 status: active
@@ -42,5 +42,5 @@ search_tier: supplemental
 |---|---|
 | Attach / TAU / 默认承载流程 | `20_Service-Flows/Network-Registration` |
 | 某次 reject 的真实 log 和根因 | `40_Case-Library/Registration` |
-| 运营商名称、SPN、PNN/OPL 配置方法 | `60_Configuration/运营商名称配置方法.md` |
+| 运营商名称、SPN、PNN/OPL 配置方法 | `60_Configuration/Business-Config/运营商名称配置方法.md` |
 | 平台代码如何解析注册态 | `50_Platform-Code` |

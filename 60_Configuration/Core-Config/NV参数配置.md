@@ -13,9 +13,9 @@ search_tier: supplemental
 - 本文是迁入/补充资料，先按本节入口定位，再看正文和来源记录。
 - 可复用结论应沉淀到主流程/配置/排障/case；本文只保留溯源材料和操作细节。
 
-NV 问题的核心不是“配置文件里有没有写”，而是确认目标产物、刷入版本、运行时读取值三者一致。本文只回答“怎么配置、怎么生成/写入、怎么验证是否生效”；字段含义和需求项到 NV/LID/MCFG 字段的候选映射看 [Modem NV参数映射](References/NV/Modem NV参数映射.md)。
+NV 问题的核心不是“配置文件里有没有写”，而是确认目标产物、刷入版本、运行时读取值三者一致。本文只回答“怎么配置、怎么生成/写入、怎么验证是否生效”；字段含义和需求项到 NV/LID/MCFG 字段的候选映射看 [Modem NV参数映射](../References/NV/Modem NV参数映射.md)。
 
-参数映射入口：[Modem NV参数映射](References/NV/Modem NV参数映射.md)
+参数映射入口：[Modem NV参数映射](../References/NV/Modem NV参数映射.md)
 
 职责边界：
 
@@ -70,10 +70,10 @@ NV 问题的核心不是“配置文件里有没有写”，而是确认目标�
 
 | 入口 | 用途 |
 |---|---|
-| [配置目录 README](README.md) | 回到配置分类和放置规则 |
-| [Case横向索引](../40_Case-Library/Case横向索引.md) | 查历史同类问题和第一坏点 |
-| [平台代码入口](../50_Platform-Code/README.md) | 查厂商代码读取位置 |
-| [常用命令](../70_Tools-Debug/Commands/常用命令.md) | 查 dumpsys、logcat 和 adb 命令 |
+| [配置目录 README](../README.md) | 回到配置分类和放置规则 |
+| [Case横向索引](../../40_Case-Library/Case横向索引.md) | 查历史同类问题和第一坏点 |
+| [平台代码入口](../../50_Platform-Code/README.md) | 查厂商代码读取位置 |
+| [常用命令](../../70_Tools-Debug/Commands/常用命令.md) | 查 dumpsys、logcat 和 adb 命令 |
 
 ### 常见失败模式
 
@@ -124,8 +124,8 @@ NV 问题的核心不是“配置文件里有没有写”，而是确认目标�
 
 ## 关联入口
 
-- [[SIMLock配置方法|SIMLock与锁网配置]]
-- [[../50_Platform-Code/Cross-Platform/平台代码与产物速查#Modem产物与Patch管理|Modem产物与Patch管理]]
+- [[../Business-Config/SIMLock配置方法|SIMLock与锁网配置]]
+- [[../../50_Platform-Code/Cross-Platform/平台代码与产物速查#Modem产物与Patch管理|Modem产物与Patch管理]]
 
 ## Operator NV 验证补充
 
@@ -313,24 +313,24 @@ info=[when read rssi, Again_index:... exceed XDSP_RX_NUM_TBL_ENTRIES:25]
 * **工具选择**：
   * `NVEditor`：打开\*.prj工程文件
   * `NVTool`：打开RDNV/rd_nvitem.xprj
-* ![](../attachments/outline/4a4c74e2-5f3b-4d90-91dd-099cef5f5968.png)
+* ![](../../attachments/outline/4a4c74e2-5f3b-4d90-91dd-099cef5f5968.png)
 * **修改步骤**：
 
 
   1. 按工具路径修改配置（如IMEI SVN）
   2. 使用Ctrl+F搜索定位配置项
 
-   ![](../attachments/outline/15509dd2-55d5-45ad-a975-b51734473794.png)
+   ![](../../attachments/outline/15509dd2-55d5-45ad-a975-b51734473794.png)
   3. 在Operator NV界面点击Save保存
 
-   ![](../attachments/outline/959f0306-58e7-4812-bc29-8d7a76f306d9.png)
+   ![](../../attachments/outline/959f0306-58e7-4812-bc29-8d7a76f306d9.png)
 
-   ![](../attachments/outline/05da8cdd-fa0d-4b1c-9adf-a859f0700863.png)
-  4. ![](../attachments/outline/987f2c12-c752-4e65-8e3d-65afe87b5931.png)
+   ![](../../attachments/outline/05da8cdd-fa0d-4b1c-9adf-a859f0700863.png)
+  4. ![](../../attachments/outline/987f2c12-c752-4e65-8e3d-65afe87b5931.png)
 
    主界面点击Save Project保存工程
 
- ![](../attachments/outline/6b970693-5e3c-451b-b484-8491f6e61fa6.png)
+ ![](../../attachments/outline/6b970693-5e3c-451b-b484-8491f6e61fa6.png)
 
 #### 1.4 NV修改注释添加规范
 
@@ -339,18 +339,18 @@ info=[when read rssi, Again_index:... exceed XDSP_RX_NUM_TBL_ENTRIES:25]
    * 用文本工具打开nv文件
    * 在修改内容附近直接添加注释
 
-  ![](../attachments/outline/256a4945-e591-48fd-adef-f7bebe06e2a8.png)
+  ![](../../attachments/outline/256a4945-e591-48fd-adef-f7bebe06e2a8.png)
   * **首次多行修改**：
    * 集中放置修改项
    * 统一添加区块注释
 
-  ![](../attachments/outline/464f8ecb-abb4-4206-b985-aa6b8d6fe2e0.png)
+  ![](../../attachments/outline/464f8ecb-abb4-4206-b985-aa6b8d6fe2e0.png)
   * **多次修改（已有注释）**：
    * 还原原有注释和顺序
    * 添加新修改注释
    * 避免使用展锐新工具（会打乱顺序）
 
- ![](../attachments/outline/65c4fe8d-5661-4604-84f0-701acd31f3f0.png)
+ ![](../../attachments/outline/65c4fe8d-5661-4604-84f0-701acd31f3f0.png)
 
 * **提交要求**：
   * 提交修改的NV文件+生成的bin文件
@@ -364,7 +364,7 @@ info=[when read rssi, Again_index:... exceed XDSP_RX_NUM_TBL_ENTRIES:25]
 
   1. `clone_sr_files`调用`generate_nvitem.sh`
 
-   ![](../attachments/outline/c4e3b72c-cbac-4c1e-a4f9-f6146178d409.png)
+   ![](../../attachments/outline/c4e3b72c-cbac-4c1e-a4f9-f6146178d409.png)
   2. 传递参数：
    * `$1`：项目名称（如SE511_GH5111_32Bit_Go）
    * `$2`：硬件平台（如ums9230）
@@ -374,7 +374,7 @@ info=[when read rssi, Again_index:... exceed XDSP_RX_NUM_TBL_ENTRIES:25]
   * `checkModemBuildParameters()`：验证文件完整性
   * `generatingModemNvitemBin()`：用LinuxCmdNV生成bin
 
-  ![](../attachments/outline/97a205fd-46e1-4e4b-8bec-40ffb2f36217.png)
+  ![](../../attachments/outline/97a205fd-46e1-4e4b-8bec-40ffb2f36217.png)
   * `copyBuildNvitemBin()`：复制到目标目录
 
 ```mermaid
@@ -404,7 +404,7 @@ graph TD
   * 在SR目录统一维护Operator NV
   * 运营商配置与项目解耦
 
- ![](../attachments/outline/0f80f0ca-adb2-4ace-9f23-4f6314551265.png)
+ ![](../../attachments/outline/0f80f0ca-adb2-4ace-9f23-4f6314551265.png)
 
 #### 2.2 脚本优化流程
 
@@ -414,15 +414,15 @@ graph TD
    * 根据项目信息从alps拷贝内容
    * 特殊处理exlna（外部低噪放频段需求）
 
-   ![](../attachments/outline/22a98f02-53a1-4892-9fe5-5480f0a545bd.png)
+   ![](../../attachments/outline/22a98f02-53a1-4892-9fe5-5480f0a545bd.png)
 2. **NV编译阶段**：
    * 导入差分NV目录生成NV Image
 
-   ![](../attachments/outline/d7720887-3eaa-4b08-a45d-5b0b97d184fb.png)
+   ![](../../attachments/outline/d7720887-3eaa-4b08-a45d-5b0b97d184fb.png)
 3. **Operator NV差分**：
    * **限制**：LinuxCmdNV不支持Operator NV批量差分（展锐SPCSS01530980确认）
 
-   ![](../attachments/outline/23873169-11f6-4513-982c-bf7c4a7e9615.png)
+   ![](../../attachments/outline/23873169-11f6-4513-982c-bf7c4a7e9615.png)
    * **添加脚本差分**：
    * 文件名需与目标NV一致
    * 新增PLMN必须填写
@@ -453,13 +453,13 @@ graph LR
 4. **清理阶段**：
    * 编译后bin文件拷贝回alps
 
-   ![](../attachments/outline/28371538-3d04-4f8b-a8b3-cfd7f83afb24.png)
+   ![](../../attachments/outline/28371538-3d04-4f8b-a8b3-cfd7f83afb24.png)
    * 删除临时文件夹
 
-   ![](../attachments/outline/84f3506a-c95c-46f3-ab2b-585fb890e921.png)
+   ![](../../attachments/outline/84f3506a-c95c-46f3-ab2b-585fb890e921.png)
    * **防误导机制**：初始化时清除alps下旧修改
 
-   ![](../attachments/outline/f4aeab19-a033-4d6f-a8d9-c8c9074fb2cb.png)
+   ![](../../attachments/outline/f4aeab19-a033-4d6f-a8d9-c8c9074fb2cb.png)
 
 #### **2.3 注意事项**
 
@@ -484,11 +484,11 @@ graph LR
 
 ### 附件
 
-[102303__运营商NV配置指南V1.1.pdf 1579159](..\attachments\outline\files\d71a5b9a-8443-4658-b50e-6507187caaeb_102303__运营商NV配置指南V1.1.pdf)
+[102303__运营商NV配置指南V1.1.pdf 1579159](..\..\attachments\outline\files\d71a5b9a-8443-4658-b50e-6507187caaeb_102303__运营商NV配置指南V1.1.pdf)
 
-[105256__Modem运营商NV参数配置指南V1.0.pdf 1817337](..\attachments\outline\files\6e57bf09-a51f-43bb-abe5-c43347771875_105256__Modem运营商NV参数配置指南V1.0.pdf)
+[105256__Modem运营商NV参数配置指南V1.0.pdf 1817337](..\..\attachments\outline\files\6e57bf09-a51f-43bb-abe5-c43347771875_105256__Modem运营商NV参数配置指南V1.0.pdf)
 
-[展锐Modem NV修改以及注释添加.pptx 2016200](..\attachments\outline\files\33f539a2-b595-4bdc-b8d2-17aa1c4363a4_展锐Modem NV修改以及注释添加.pptx)
+[展锐Modem NV修改以及注释添加.pptx 2016200](..\..\attachments\outline\files\33f539a2-b595-4bdc-b8d2-17aa1c4363a4_展锐Modem NV修改以及注释添加.pptx)
 
 
 ### 展锐NV参数
@@ -500,7 +500,7 @@ graph LR
 
 ### NVTool工具使用
 
-[NVTool User Guide (zh).pdf 1035919](..\attachments\outline\files\c1809b72-47e4-47fd-bcac-4437a59b023a_NVTool User Guide (zh).pdf)
+[NVTool User Guide (zh).pdf 1035919](..\..\attachments\outline\files\c1809b72-47e4-47fd-bcac-4437a59b023a_NVTool User Guide (zh).pdf)
 
 ### 来源记录
 

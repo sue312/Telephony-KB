@@ -48,6 +48,7 @@ NAV_SUBGROUP_LABELS = {
     },
     "60_Configuration": {
         "ROOT": "配置入口 / Core",
+        "Business-Config": "业务配置 / Business",
         "References": "字段映射 / References",
         "OperatorRecords": "运营商记录 / OperatorRecords",
     },
@@ -55,7 +56,7 @@ NAV_SUBGROUP_LABELS = {
 
 NAV_SUBGROUP_ORDER = {
     "40_Case-Library": ["ROOT", "Registration", "SIM", "Call", "Supplementary-Service", "Data", "IMS", "SMS", "Signal", "Stability"],
-    "60_Configuration": ["ROOT", "References", "OperatorRecords"],
+    "60_Configuration": ["ROOT", "Business-Config", "References", "OperatorRecords"],
 }
 
 SEARCH_METADATA_FIELDS = [

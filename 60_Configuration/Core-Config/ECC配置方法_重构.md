@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: config
 domain: Configuration
 status: active
@@ -650,10 +650,10 @@ adb shell sqlite3 /data/vendor/radio/qcrilNr.db "select * from qcril_emergency_s
 
 | Case | 复用点 |
 |---|---|
-| [ECC_UNISOC_routing不控制无卡禁止_card_flag](../40_Case-Library/Call/2022-07-30_ECC_UNISOC_routing不控制无卡禁止_card_flag.md) | 区分 `routing` 与 `card_flag` |
-| [ECC_UNISOC_PIN未解锁EF_ECC与无卡ECC分类](../40_Case-Library/Call/2021-06-04_ECC_UNISOC_PIN未解锁EF_ECC与无卡ECC分类.md) | PIN locked 不等同无卡 |
-| [ECC_UNISOC_无卡紧急呼叫选到eSIM卡槽失败](../40_Case-Library/Call/2025-12-10_ECC_UNISOC_无卡紧急呼叫选到eSIM卡槽失败.md) | 无卡 ECC 还要看 phoneId / slot 选择 |
-| [LA Réunion重定向](../40_Case-Library/Call/Imported_Call_03_LA_Réunion重定向.md) | 本地 ECC 配置和 fallback 导致号码重定向 |
+| [ECC_UNISOC_routing不控制无卡禁止_card_flag](../../40_Case-Library/Call/2022-07-30_ECC_UNISOC_routing不控制无卡禁止_card_flag.md) | 区分 `routing` 与 `card_flag` |
+| [ECC_UNISOC_PIN未解锁EF_ECC与无卡ECC分类](../../40_Case-Library/Call/2021-06-04_ECC_UNISOC_PIN未解锁EF_ECC与无卡ECC分类.md) | PIN locked 不等同无卡 |
+| [ECC_UNISOC_无卡紧急呼叫选到eSIM卡槽失败](../../40_Case-Library/Call/2025-12-10_ECC_UNISOC_无卡紧急呼叫选到eSIM卡槽失败.md) | 无卡 ECC 还要看 phoneId / slot 选择 |
+| [LA Réunion重定向](../../40_Case-Library/Call/Imported_Call_03_LA_Réunion重定向.md) | 本地 ECC 配置和 fallback 导致号码重定向 |
 
 ## 维护要求
 

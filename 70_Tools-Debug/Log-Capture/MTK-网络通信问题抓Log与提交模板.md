@@ -144,8 +144,7 @@ Description 建议：
 
 ## 本地关联
 
-- [场测Log抓取SOP](场测Log抓取SOP.md)
+- [MTK-DebugLogger抓LogSOP](MTK-DebugLogger抓LogSOP.md)
 - [Log分析方法](../Log-Analysis/Log分析方法.md)
 - [MTK-WFC-ePDG配置与排查索引](../../60_Configuration/MTK-WFC-ePDG配置与排查索引.md)
 - [MTK-5G注册与PDU排障入口](../../30_Troubleshooting/MTK-5G注册与PDU排障入口.md)
-

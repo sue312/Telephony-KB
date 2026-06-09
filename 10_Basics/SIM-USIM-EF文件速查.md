@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: concept
 domain: Basics
 status: active
@@ -79,6 +79,6 @@ CQWeb 历史问题 `SPCSS01630213` 确认过需求口径：终端支持 `EF_PLMN
 ## 关联入口
 
 - [[../20_Service-Flows/SIM/SIM业务流程]]
-- [[../60_Configuration/SMS配置方法]]
-- [[../60_Configuration/运营商名称配置方法]]
+- [[../60_Configuration/Business-Config/SMS配置方法]]
+- [[../60_Configuration/Business-Config/运营商名称配置方法]]
 - [[通信基础概念]]

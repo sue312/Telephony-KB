@@ -12,7 +12,7 @@ search_tier: main_entry
 
 - 本目录放补充业务真实问题和旧资料集合入口，包括 Call Forwarding、Call Barring、USSD、UT/XCAP、USSI、CISS、CSFB 回落等。
 - 普通 MO/MT call、call drop、SRVCC、ECC 仍放 `Call`；IMS 注册、SIP REGISTER、VoLTE/VoWiFi 能力仍放 `IMS`；XCAP APN 建链或 APN UI 问题仍放 `Data` 或 `60_Configuration`。
-- 配置字段和验证方法看 [补充业务配置方法](../../60_Configuration/补充业务配置方法.md)，第一轮分诊看 [补充业务失败排障流程](../../30_Troubleshooting/补充业务失败排障流程.md)。
+- 配置字段和验证方法看 [补充业务配置方法](../../60_Configuration/Business-Config/补充业务配置方法.md)，第一轮分诊看 [补充业务失败排障流程](../../30_Troubleshooting/补充业务失败排障流程.md)。
 
 ## 已整理案例
 
@@ -27,6 +27,6 @@ search_tier: main_entry
 | 内容 | 放置位置 |
 |---|---|
 | CF/CB/CW/CLIR/CLIP/USSD/UT/XCAP 的真实问题 | `40_Case-Library/Supplementary-Service` |
-| XCAP APN 或 APN type 显示问题 | `40_Case-Library/Data` 或 `60_Configuration/APN配置方法_重构.md` |
+| XCAP APN 或 APN type 显示问题 | `40_Case-Library/Data` 或 `60_Configuration/Core-Config/APN配置方法_重构.md` |
 | IMS 注册、SIP 注册、VoLTE 能力问题 | `40_Case-Library/IMS` |
 | 普通语音通话建立、掉话、SRVCC、ECC | `40_Case-Library/Call` |
