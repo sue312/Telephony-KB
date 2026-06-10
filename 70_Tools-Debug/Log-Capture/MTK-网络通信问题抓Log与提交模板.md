@@ -2,7 +2,7 @@
 doc_type: tool
 domain: Tools-Debug
 status: active
-quality: imported_reference
+quality: curated
 platform: MTK
 source: Notion MTK 网络通信模块知识库 / MediaTek Online Telephony Common
 source_url: https://www.notion.so/35df72d579ba817eb528d6f08a68e6f8

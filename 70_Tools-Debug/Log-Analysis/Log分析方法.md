@@ -13,12 +13,6 @@ AP log 和 modem log 的通用分析方法统一放在这里。LTE 注册专项�
 
 ## AP-log分析方法
 
----
-domain: LogAnalysis
-layer: AP/Framework
-status: draft
----
-
 ### AP log能回答什么
 
 - Framework有没有发起请求。
@@ -97,12 +91,6 @@ AP侧推断：framework状态更新链路正常/异常。
 ```
 
 ## Modem-log分析方法
-
----
-domain: LogAnalysis
-layer: Modem
-status: draft
----
 
 ### Modem log优先回答什么
 

@@ -53,7 +53,7 @@ search_tier: supplemental
 
 ## 关联入口
 
-- [UNISOC-Logel工具使用SOP](../Log-Analysis/UNISOC-Logel工具使用SOP.md)
+- [UNISOC-Logel日志分析SOP](../Log-Analysis/UNISOC-Logel日志分析SOP.md)
 - [无线信号与搜网失败排查](../../30_Troubleshooting/无线信号与搜网失败排查.md)
 
 ## 来源记录

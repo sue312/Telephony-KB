@@ -6,7 +6,7 @@ domain: LogAnalysis
 layer: AP/Modem/RIL
 rat: LTE
 platform: UNISOC/MTK
-status: draft
+status: active
 tags: [LTE, Registration, LogAnalysis, UNISOC, MTK]
 ---
 
