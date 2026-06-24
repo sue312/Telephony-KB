@@ -18,7 +18,7 @@ tags:
   - ecc
   - eccdata
   - local-config
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # LA Réunion重定向

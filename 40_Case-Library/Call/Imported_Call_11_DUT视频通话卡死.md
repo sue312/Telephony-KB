@@ -19,7 +19,7 @@ tags:
   - vilte
   - rtp
   - ap-media
-search_tier: reference_only
+search_tier: case_summary
 ---
 
 # DUT视频通话卡死

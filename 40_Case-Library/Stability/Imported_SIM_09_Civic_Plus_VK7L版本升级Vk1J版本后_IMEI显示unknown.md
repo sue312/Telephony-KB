@@ -18,7 +18,7 @@ tags:
   - modem-image
   - nvram
   - imei
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # Civic Plus VK7L版本升级Vk1J版本后，IMEI显示unknown

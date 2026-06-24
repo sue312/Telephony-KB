@@ -40,9 +40,8 @@ search_tier: main_entry
 | Status | closed | 4 |
 | Status | summarized | 96 |
 | Status | summarized_with_log_gap | 12 |
-| SearchTier | case_summary | 68 |
-| SearchTier | reference_only | 9 |
-| SearchTier | supplemental | 35 |
+| SearchTier | case_summary | 108 |
+| SearchTier | supplemental | 4 |
 
 ## 全量索引
 

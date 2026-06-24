@@ -17,7 +17,7 @@ tags:
   - split_from_bucket
   - rf-parameter
   - product-mismatch
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # DAHLIA 450A软件刷在450H手机上，能搜到网络，但是注册不上网络

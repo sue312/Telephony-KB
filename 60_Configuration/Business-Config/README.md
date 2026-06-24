@@ -34,7 +34,7 @@ search_tier: main_entry
 | 网络制式图标 | [网络制式图标配置方法](网络制式图标配置方法.md) | 4G/5G/NR 图标显示、CarrierConfig、MobileMappings |
 | 卫星通信 | [卫星通信配置](卫星通信配置.md) | Satellite Telephony feature flag、区域和能力门控 |
 | 小区广播 | [小区广播配置方法](小区广播配置方法.md) | CB/CMAS/ETWS 信道、Mainline 限制、紧急广播过滤 |
-| 运营商名称 | [运营商名称配置方法](运营商名称配置方法.md) | EONS、SPN、PNN/OPL、NITZ、手动搜网列表名称 |
+| 运营商名称 | [运营商名称配置方法](运营商名称配置方法_重构.md) | EONS、SPN、PNN/OPL、NITZ、手动搜网列表名称 |
 
 ## 放置规则
 

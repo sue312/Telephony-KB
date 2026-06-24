@@ -18,7 +18,7 @@ tags:
   - nvram
   - sml
   - lid-size
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # civic项目，试产前，内部发现Mini软件校准写码后，使用flashtool下载CU软件，modem出现EE

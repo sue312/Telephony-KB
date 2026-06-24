@@ -18,7 +18,7 @@ tags:
   - nvram
   - modem-assert
   - evidence-gap
-search_tier: reference_only
+search_tier: case_summary
 ---
 
 # Model3 生产，出现音频无声及卡logo问题

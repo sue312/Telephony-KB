@@ -1535,12 +1535,36 @@ button {
 
 
 JS = r"""
+const sidebar = document.querySelector(".sidebar");
 const navInput = document.querySelector("[data-search]");
 const navLinks = [...document.querySelectorAll("[data-nav-link]")];
 const navEmpty = document.querySelector("[data-nav-empty]");
 const navSections = [...document.querySelectorAll("[data-nav-section]")];
 const navSubsections = [...document.querySelectorAll("[data-nav-subsection]")];
 const sectionFilters = [...document.querySelectorAll("[data-section-filter]")];
+
+const sidebarScrollKey = "telephony-kb:sidebar-scroll-top";
+
+const saveSidebarScroll = () => {
+  if (!sidebar) return;
+  try {
+    sessionStorage.setItem(sidebarScrollKey, String(sidebar.scrollTop));
+  } catch {
+    // Storage can be disabled for local files in hardened browser profiles.
+  }
+};
+
+const restoreSidebarScroll = () => {
+  if (!sidebar) return;
+  try {
+    const saved = sessionStorage.getItem(sidebarScrollKey);
+    if (saved === null) return;
+    const top = Number.parseInt(saved, 10);
+    if (Number.isFinite(top)) sidebar.scrollTop = top;
+  } catch {
+    // Keep navigation usable even when sessionStorage is unavailable.
+  }
+};
 
 const applyNavSearch = () => {
   const q = navInput ? navInput.value.trim().toLowerCase() : "";
@@ -1584,6 +1608,14 @@ for (const input of sectionFilters) {
 }
 
 applyNavSearch();
+restoreSidebarScroll();
+
+for (const link of navLinks) {
+  link.addEventListener("pointerdown", saveSidebarScroll);
+  link.addEventListener("click", saveSidebarScroll);
+}
+
+window.addEventListener("pagehide", saveSidebarScroll);
 
 const normalize = (value) => String(value ?? "").trim();
 const normalizeLower = (value) => normalize(value).toLowerCase();

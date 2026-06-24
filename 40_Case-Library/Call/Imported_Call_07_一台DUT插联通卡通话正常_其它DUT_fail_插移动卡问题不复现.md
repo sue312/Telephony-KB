@@ -18,7 +18,7 @@ tags:
   - csfb
   - rf-calibration
   - call-fail
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # 一台DUT插联通卡通话正常，其它DUT fail；插移动卡问题不复现

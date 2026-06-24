@@ -18,7 +18,7 @@ tags:
   - roaming
   - apn
   - pdp
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # MP6漫游失败

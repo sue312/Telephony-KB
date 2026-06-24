@@ -18,7 +18,7 @@ tags:
   - no-atr
   - hardware
   - evidence-gap
-search_tier: reference_only
+search_tier: case_summary
 ---
 
 # 6601 蓝鸟售后反馈不识卡

@@ -32,14 +32,14 @@ D:\Tool\MTK\ELT_v3.2524.2\Documents\FAQ.pdf
 
 ![MTK ELT打开 OTA Messages 后的界面](../../attachments/tools/log-analysis/mtk-elt-ota-messages.png)
 
-| 区域 | 位置 | 新手怎么用 |
-|---|---|---|
-| 菜单和工具栏 | 顶部 `File / View / Control / Config` | `File` 打开日志，`View` 打开分析窗口，`Control` 连接设备或设置 filter |
-| `Window Explorer` | 左侧 | 看当前 `.elg` 里有哪些视图；常用的是 `PS Integrated`、`OTA Messages`、`System Trace`、`SIP Messages` |
-| Tab 区 | 中上方 | 在 `PS Integrated`、`OTA Messages`、`System Trace`、`SIP Messages` 之间切换 |
-| 消息列表 | 中间 | 按时间顺序看消息；优先确认 `Local Time`、`Direction`、`Layer`、`Message Type` |
-| 详情窗格 | 下方浅黄色区域 | 选中消息后看解码字段；写结论时优先摘这里的协议字段和 cause |
-| 状态栏 | 最底部 | 看平台、版本、是否离线、当前 log/数据库状态 |
+| 区域                | 位置                                  | 新手怎么用                                                                               |
+| ----------------- | ----------------------------------- | ----------------------------------------------------------------------------------- |
+| 菜单和工具栏            | 顶部 `File / View / Control / Config` | `File` 打开日志，`View` 打开分析窗口，`Control` 连接设备或设置 filter                                  |
+| `Window Explorer` | 左侧                                  | 看当前 `.elg` 里有哪些视图；常用的是 `PS Integrated`、`OTA Messages`、`System Trace`、`SIP Messages` |
+| Tab 区             | 中上方                                 | 在 `PS Integrated`、`OTA Messages`、`System Trace`、`SIP Messages` 之间切换                 |
+| 消息列表              | 中间                                  | 按时间顺序看消息；优先确认 `Local Time`、`Direction`、`Layer`、`Message Type`                       |
+| 详情窗格              | 下方浅黄色区域                             | 选中消息后看解码字段；写结论时优先摘这里的协议字段和 cause                                                    |
+| 状态栏               | 最底部                                 | 看平台、版本、是否离线、当前 log/数据库状态                                                            |
 
 先记住一个原则：ELT 不是直接看普通文本的工具，它要么打开 `.elg`，要么把 `.muxz` / `.muxraw` 转成 `.elg` 后再看。
 

@@ -3,7 +3,7 @@ doc_type: config
 domain: Configuration
 status: active
 quality: imported_reference
-search_tier: supplemental
+search_tier: reference_only
 platform: Cross-Platform
 current_coverage: UNISOC, Qualcomm, MTK
 future_coverage: TBD
@@ -12,6 +12,15 @@ source: 运营商配置参考.xlsx; 105256__4G平台Modem运营商NV参数配置
 ---
 
 # Modem NV参数映射
+
+<!-- REFERENCE_ONLY_BOUNDARY_START -->
+## 使用边界
+
+- 本页是字段表、参数表或外部片段，只用于查字段、查来源、做关键词回溯。
+- 不作为流程结论、配置生效结论或真实问题第一坏点引用。
+- 需要判断问题时，先回到对应主文档、排障流程或 Case。
+<!-- REFERENCE_ONLY_BOUNDARY_END -->
+
 
 本文件是 Modem/Operator NV 参数映射总入口，只做“字段映射和资料索引”。当前已沉淀 UNISOC、Qualcomm MCFG/MBN 与 MTK NV 参数映射；不同平台不能直接套用字段名和默认值。
 

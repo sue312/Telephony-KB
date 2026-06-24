@@ -17,7 +17,7 @@ tags:
   - split_from_bucket
   - rf-calibration
   - no-service
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # WM58 使用物联网卡，无法注册上网络

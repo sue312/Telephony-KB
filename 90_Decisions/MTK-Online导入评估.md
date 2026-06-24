@@ -6,7 +6,7 @@ quality: imported_reference
 platform: MTK
 source: Notion MTK 网络通信模块知识库
 source_url: https://www.notion.so/35df72d579ba8119b35afddb83be1fa8
-search_tier: archived_entry
+search_tier: supplemental
 ---
 
 # MTK Online导入评估

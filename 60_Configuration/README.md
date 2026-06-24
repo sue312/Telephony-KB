@@ -68,7 +68,7 @@ PowerShell -ExecutionPolicy Bypass -File F:\Codex\Knowledge\Telephony-KB\70_Tool
 | [User-Agent配置方法](Business-Config/User-Agent配置方法.md) | IMS / SIP、MMS、Video Streaming User-Agent 客制化 |
 | [网络制式图标配置方法](Business-Config/网络制式图标配置方法.md) | 4G/5G/NR 图标显示、CarrierConfig 和 MobileMappings 入口 |
 | [卫星通信配置](Business-Config/卫星通信配置.md) | Satellite Telephony feature flag 和相关配置 |
-| [运营商名称配置方法](Business-Config/运营商名称配置方法.md) | EONS、PNN/OPL/SPN、运营商名称加载流程 |
+| [运营商名称配置方法](Business-Config/运营商名称配置方法_重构.md) | EONS、PNN/OPL/SPN、NITZ、手动搜网列表名称和平台配置入口 |
 | [小区广播配置方法](Business-Config/小区广播配置方法.md) | Cell Broadcast / CBS 信道、Mainline 限制、紧急广播过滤边界 |
 | [[运营商应答资料索引]] | AMX、Orange、Technical、DTR 等运营商资料入口 |
 

@@ -18,7 +18,7 @@ tags:
   - ims
   - conference
   - sip-refer
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # 会议通话无法合并

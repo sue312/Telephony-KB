@@ -18,7 +18,7 @@ tags:
   - power
   - emergency-search
   - ecc
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # CM52在宁波实验室测试，待机功耗高

@@ -18,7 +18,7 @@ tags:
   - modem-assert
   - ca-capability
   - registration
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # CC51 safracom，CA超出平台能力，导致无法注册网络

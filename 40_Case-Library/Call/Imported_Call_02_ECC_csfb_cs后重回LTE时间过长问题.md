@@ -19,7 +19,7 @@ tags:
   - csfb
   - fast-return
   - operator-nv
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # ECC csfb cs后重回LTE时间过长问题

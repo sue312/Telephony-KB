@@ -18,7 +18,7 @@ tags:
   - ecc
   - emergency-urn
   - category-mapping
-search_tier: supplemental
+search_tier: case_summary
 ---
 
 # urn:service:sos.police问题
