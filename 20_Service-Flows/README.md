@@ -25,6 +25,7 @@ search_tier: main_entry
 | [IMS](IMS/IMS业务流程.md) | IMS 注册、VoLTE、VoWiFi、VoNR、SMS over IP、USSD |
 | [Call](Call/Call业务流程.md) | CS Call、ECC、SRVCC、EPSFB、掉话、补充业务 |
 | [SIM](SIM/SIM业务流程.md) | 卡识别、应用选择、READY、鉴权前置 |
+| [BT](BT/README.md) | 蓝牙开关、扫描发现、配对绑定、Profile连接、BLE/GATT、蓝牙音频 |
 | [Stability](Stability/Modem稳定性与Assert.md) | modem assert、radio restart、稳定性前置判断 |
 
 ## 迁入资料补充

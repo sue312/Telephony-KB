@@ -27,6 +27,7 @@ CS call、VoLTE call、VoNR call、MO/MT call fail、call drop、SRVCC、EPSFB�
 | [[2025-06-23_ECC_双卡紧急号码共享]] | 双卡紧急号码池共享 | 判断 emergency number 是否按设备级缓存 |
 | [[2026-06-05_ECC_UNISOC_喀麦隆113缺少routing2误走EMERGENCY_SETUP]] | 喀麦隆 113 缺少 `routing:2` 无法呼出 | 区分未配 fake/normal routing 导致的真紧急 `EMERGENCY_SETUP` |
 | [[2025-W22_Call_SRVCC_Claro切换掉话]] | VoLTE 通话 SRVCC 后掉话 | SRVCC 能力协商、Feature-Caps、切换执行排查口径 |
+| [[2026-06-25_Call_SRVCC_405854_RJIO_srvcc_cap为0导致BYE]] | 405854/RJIO 仪表 SRVCC 到 3G 被 BYE 释放 | 用 `srvcc_cap=0x00` 和 RJIO 源码 profile 区分运行时覆盖与静态默认 |
 | [[Imported_Call_01_urnservicesos.police问题]] | 多类型 ECC 被映射为 `urn:service:sos.police` | 区分网络 category、SIP emergency URN 和 generic URN 配置 |
 | [[Imported_Call_02_ECC_csfb_cs后重回LTE时间过长问题]] | ECC 后长时间停留 3G | 区分 CSFB 与 ECC 选网入 3G，核对 `ecc_cs_prefer` / `ecc_cs_only` |
 | [[Imported_Call_03_LA_Réunion重定向]] | RE 15/17/18 被重定向到 112 | 本地 `eccdata` / fallback 与运营商需求不一致 |
