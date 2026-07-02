@@ -25,6 +25,8 @@ adb shell dumpsys activity broadcasts > broadcasts.txt
 
 底层连接、配对、扫描或数据传输问题需要打开 Bluetooth HCI snoop log，复现后从 bugreport 或设备路径导出并用 Wireshark 分析。
 
+远距离和射频能力问题还要补 BT OTA 报告、CP2/WCN log；如果需要证明空口重传、干扰或实际发射功率，优先补 Ellisys、Frontline 等空口仪 log。
+
 ## 按现象分诊
 
 | 现象 | 第一坏点优先级 | 先看证据 |
@@ -36,6 +38,7 @@ adb shell dumpsys activity broadcasts > broadcasts.txt
 | 搜到但配不上 | createBond -> pairing request -> 用户确认 -> SMP/SSP/HCI reason | `createBond`、`PAIRING_REQUEST`、`setPairingConfirmation`、HCI |
 | 已配对但连不上 | ACL -> SDP/UUID -> Profile connect | `connectAllEnabledProfiles`、`ACTION_UUID`、Profile log、HCI |
 | BLE 连接后无服务 | GATT connected -> discoverServices -> ATT response | `connectGatt`、`discoverServices`、ATT error |
+| BLE 远距离断链或业务质量差 | OTA 能力 -> PHY -> 连接参数 -> ATT/GATT 包大小 -> App 重试 | TRP/TIS、`LE PHY Update Complete`、connection update、MTU、ATT value、disconnect reason |
 | 音乐无声 | A2DP state -> active device -> Audio HAL -> HCI data | `A2dpService`、`AudioService`、`BluetoothAudioHal` |
 | 耳机按键无效 | AVRCP 连接 -> 控制命令 -> MediaSession | `Avrcp`、media key、playback state |
 | 通话不走蓝牙 | HFP 连接 -> SCO -> call audio route | `HeadsetService`、`SCO`、`AudioService`、Telecom |
@@ -49,6 +52,7 @@ adb shell dumpsys activity broadcasts > broadcasts.txt
 | native stack | `libbluetooth_jni.so`、`bt_stack_manager`、`event_init_stack`、`event_shut_down_stack` |
 | 经典扫描 | `startDiscovery`、`cancelDiscovery`、`deviceFoundCallback`、`ACTION_FOUND` |
 | BLE 扫描 | `BluetoothLeScanner`、`GattService`、`ScanManager`、`onScanResult`、`onScanFailed` |
+| BLE 远距离 | `LE PHY Update`、`LE_CODED`、`Connection Update`、`supervision timeout`、`Connection Timeout`、`0x08`、`MTU`、`ATT`、`CID 0x0004`、`TRP`、`TIS` |
 | 配对 | `createBond`、`BluetoothBondStateMachine`、`PAIRING_REQUEST`、`BOND_BONDED` |
 | 安全协商 | `smp`、`sspRequestCallback`、`btm_sec_bond_by_transport` |
 | Profile | `connectAllEnabledProfiles`、`A2dpService`、`HeadsetService`、`Avrcp`、`HidHostService` |
@@ -75,3 +79,6 @@ HCI/底层证据：
 - `BOND_BONDED` 只能说明配对完成，不能证明 Profile 连接成功。
 - A2DP connected 不能证明 HFP/SCO 正常，音频问题必须按 Profile 分开写。
 - RSSI 只能辅助判断距离和环境，不能单独作为兼容性或硬件根因。
+- TRP/TIS 是整机 OTA 能力指标，TRP 越大越好，TIS 越负越好；二者不能替代 HCI 里的 PHY、连接参数和断开原因。
+- AP 侧 vendor 功率表或广播 `selected_tx_power` 只能作为线索，不能直接证明连接态数据包运行时 TX power 已经最大。
+- GATT/ATT `CID 0x0004` 说明数据走属性协议；不要把它误判成 L2CAP CoC。

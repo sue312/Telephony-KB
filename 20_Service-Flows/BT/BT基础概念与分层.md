@@ -29,28 +29,33 @@ flowchart TD
 
 ## 核心术语
 
-| 术语 | 含义 | 常见定位价值 |
-|---|---|---|
-| BR/EDR | 经典蓝牙，适合持续连接、音频、键鼠、车机等场景 | 关注 discovery、ACL、SDP、Profile |
-| BLE / LE | 低功耗蓝牙，适合广播、低功耗小数据、GATT 外设 | 关注 advertising、scan、connectGatt、GATT |
-| Dual mode | 同时支持经典蓝牙和 BLE 的设备 | 配对/连接时要确认 transport，不要只看设备名称 |
-| GAP | 发现、广播、连接角色等通用访问流程 | 扫描不到、可见性、连接角色问题 |
-| GATT | BLE 属性服务模型 | BLE service discovery、read/write/notify 问题 |
-| ATT | GATT 底层属性传输协议 | MTU、属性读写和 notification 失败 |
-| SMP | 安全管理协议，BLE 配对和密钥协商相关 | 配对失败、加密失败、bond 信息异常 |
-| SSP | 经典蓝牙 Secure Simple Pairing | 配对码、确认弹窗、Just Works 等场景 |
-| L2CAP | 逻辑链路控制与适配协议 | 上承 ATT、RFCOMM、AVDTP 等 |
-| SDP | 经典蓝牙服务发现协议 | 配对后不知道对端支持哪些 Profile |
-| RFCOMM | 串口仿真通道 | SPP、部分车机或传统设备连接 |
-| A2DP | 蓝牙音乐音频传输 | 耳机无音乐声、编码和 audio path |
-| AVRCP | 媒体控制和元数据 | 耳机按键、播放暂停、曲目信息 |
-| HFP | 免提通话 Profile | 蓝牙通话音频、SCO、拨号和接听控制 |
-| HID | 键盘、鼠标、遥控器等输入设备 | 输入设备连接和按键事件 |
-| PAN | 蓝牙个人局域网 | 蓝牙网络共享类问题 |
-| HCI | Host Controller Interface | Host 与 Controller 之间的命令、事件和数据包 |
-| CoD | Class of Device，经典蓝牙设备类别 | 经典发现结果里的设备类型判断 |
-| UUID | 服务或 Profile 标识 | Profile 选择、GATT 服务发现 |
-| RSSI | 接收信号强度 | 只辅助判断距离/信号，不能单独作为根因 |
+| 术语        | 含义                         | 常见定位价值                                     |
+| --------- | -------------------------- | ------------------------------------------ |
+| BR/EDR    | 经典蓝牙，适合持续连接、音频、键鼠、车机等场景    | 关注 discovery、ACL、SDP、Profile               |
+| BLE / LE  | 低功耗蓝牙，适合广播、低功耗小数据、GATT 外设  | 关注 advertising、scan、connectGatt、GATT       |
+| Dual mode | 同时支持经典蓝牙和 BLE 的设备          | 配对/连接时要确认 transport，不要只看设备名称               |
+| GAP       | 发现、广播、连接角色等通用访问流程          | 扫描不到、可见性、连接角色问题                            |
+| GATT      | BLE 属性服务模型                 | BLE service discovery、read/write/notify 问题 |
+| ATT       | GATT 底层属性传输协议              | MTU、属性读写和 notification 失败                  |
+| SMP       | 安全管理协议，BLE 配对和密钥协商相关       | 配对失败、加密失败、bond 信息异常                        |
+| SSP       | 经典蓝牙 Secure Simple Pairing | 配对码、确认弹窗、Just Works 等场景                    |
+| L2CAP     | 逻辑链路控制与适配协议                | 上承 ATT、RFCOMM、AVDTP 等                      |
+| SDP       | 经典蓝牙服务发现协议                 | 配对后不知道对端支持哪些 Profile                       |
+| RFCOMM    | 串口仿真通道                     | SPP、部分车机或传统设备连接                            |
+| A2DP      | 蓝牙音乐音频传输                   | 耳机无音乐声、编码和 audio path                      |
+| AVRCP     | 媒体控制和元数据                   | 耳机按键、播放暂停、曲目信息                             |
+| HFP       | 免提通话 Profile               | 蓝牙通话音频、SCO、拨号和接听控制                         |
+| HID       | 键盘、鼠标、遥控器等输入设备             | 输入设备连接和按键事件                                |
+| PAN       | 蓝牙个人局域网                    | 蓝牙网络共享类问题                                  |
+| HCI       | Host Controller Interface  | Host 与 Controller 之间的命令、事件和数据包             |
+| CoD       | Class of Device，经典蓝牙设备类别   | 经典发现结果里的设备类型判断                             |
+| UUID      | 服务或 Profile 标识             | Profile 选择、GATT 服务发现                       |
+| RSSI      | 接收信号强度                     | 只辅助判断距离/信号，不能单独作为根因                        |
+| LE Coded PHY | BLE 长距离 PHY，通过编码提升弱信号鲁棒性 | 远距离场景要从 HCI `LE PHY Update Complete` 确认是否实际生效 |
+| TRP       | Total Radiated Power，总辐射功率  | BT OTA 发射能力指标，dBm 越大越好                      |
+| TIS       | Total Isotropic Sensitivity，总全向灵敏度 | BT OTA 接收能力指标，dBm 越负越好                      |
+| Supervision timeout | BLE 连接监控超时 | 远距离 `0x08 Connection Timeout` 要重点确认             |
+| MTU / ATT value | GATT/ATT 单次属性传输能力和实际承载 | 分析弱链路分片、包大小、重试和吞吐                         |
 
 ## 经典蓝牙与 BLE 对比
 
@@ -89,5 +94,6 @@ flowchart TD
 - [[BT配对与绑定流程]]
 - [[BT连接与Profile流程]]
 - [[BLE广播扫描连接GATT流程]]
+- [[BLE远距离链路与OTA指标]]
 - [[BT音频流程-A2DP-AVRCP-HFP]]
 - [[BT第一坏点速查]]

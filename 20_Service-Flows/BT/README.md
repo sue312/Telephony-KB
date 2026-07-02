@@ -26,6 +26,7 @@ search_tier: main_entry
 | [[BT配对与绑定流程]] | createBond、BondStateMachine、SSP/SMP、PAIRING_REQUEST、BOND 状态变化 |
 | [[BT连接与Profile流程]] | 配对后 ACL/Profile 连接，A2DP、AVRCP、HFP、HID、PAN 等 Profile 分诊 |
 | [[BLE广播扫描连接GATT流程]] | BLE 广播、扫描、connectGatt、discoverServices、read/write/notify 主流程 |
+| [[BLE远距离链路与OTA指标]] | BLE 远距离通信、BT OTA TRP/TIS、Coded PHY、连接参数、GATT 包大小和断链分析 |
 | [[BT音频流程-A2DP-AVRCP-HFP]] | 蓝牙音乐、媒体控制、通话音频和 Audio HAL 观察点 |
 | [[BT第一坏点速查]] | 按现象决定第一轮抓什么证据、先看哪一层 |
 
@@ -38,6 +39,7 @@ search_tier: main_entry
 | 能搜到但配不上 | [[BT配对与绑定流程]] | createBond 是否发起、配对请求是否弹出、SSP/SMP 是否失败、HCI reason |
 | 配对成功但连不上 | [[BT连接与Profile流程]] | ACL 是否建立、SDP/UUID 是否完成、目标 Profile 是否启用和连接 |
 | BLE 设备偶现搜不到或连接慢 | [[BLE广播扫描连接GATT流程]] | scan filter、advertising report、connectGatt、GATT service discovery |
+| BLE 远距离断链、消息丢失或通话断续 | [[BLE远距离链路与OTA指标]] | OTA TRP/TIS、Coded PHY、connection interval、supervision timeout、ATT/GATT 包大小、HCI disconnect reason |
 | 蓝牙耳机无声、按键无效或通话异常 | [[BT音频流程-A2DP-AVRCP-HFP]] | A2DP/AVRCP/HFP 分开看，确认 profile 状态、audio route 和 HAL |
 
 ## 最小证据包
@@ -49,6 +51,7 @@ search_tier: main_entry
 | `adb shell dumpsys activity service com.android.bluetooth/.btservice.AdapterService` | AdapterService 组件运行和绑定状态 |
 | `adb shell dumpsys activity broadcasts` | ACTION_FOUND、PAIRING_REQUEST、BOND_STATE_CHANGED 等广播是否发出 |
 | bugreport + Bluetooth HCI snoop log | HCI command/event、pairing reason、ACL/GATT/audio 数据路径证据 |
+| BT OTA 报告 / CP2 或 WCN log / 空口仪 log | TRP/TIS、controller 侧功率和 PHY、远距离断链、空口重传与干扰证据 |
 
 ## 写法约定
 
