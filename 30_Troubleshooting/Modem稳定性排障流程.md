@@ -1,4 +1,4 @@
-﻿---
+---
 doc_type: triage
 domain: Troubleshooting
 status: active
@@ -16,14 +16,14 @@ search_tier: main_entry
 
 ## 分诊顺序
 
-| 顺序 | 判断点 | 关键证据 |
-|---:|---|---|
-| 1 | 是 modem 重启还是 AP 误判 | radio unavailable、modem reset、assert dump |
-| 2 | 是否有 assert 信息 | assert reason、file/line、task、stack |
-| 3 | 触发业务是什么 | 注册、数据、通话、SIM、NV、OTA、开关机 |
-| 4 | 是否与 NV/校准相关 | fixnv、rfnv、IMEI、校准区、NV merge |
-| 5 | 是否版本/patch 相关 | modem image、patch list、编译产物、刷机包 |
-| 6 | 是否可复现 | 同机同卡、不同卡、对比版本、最小复现步骤 |
+|  顺序 | 判断点                | 关键证据                                      |
+| --: | ------------------ | ----------------------------------------- |
+|   1 | 是 modem 重启还是 AP 误判 | radio unavailable、modem reset、assert dump |
+|   2 | 是否有 assert 信息      | assert reason、file/line、task、stack        |
+|   3 | 触发业务是什么            | 注册、数据、通话、SIM、NV、OTA、开关机                   |
+|   4 | 是否与 NV/校准相关        | fixnv、rfnv、IMEI、校准区、NV merge              |
+|   5 | 是否版本/patch 相关      | modem image、patch list、编译产物、刷机包           |
+|   6 | 是否可复现              | 同机同卡、不同卡、对比版本、最小复现步骤                      |
 
 ## 最小证据包
 

@@ -1,4 +1,4 @@
-﻿---
+---
 quality: curated
 search_tier: main_entry
 doc_type: index
@@ -42,20 +42,20 @@ status: active
 
 ## IMS SIP 常见响应
 
-| SIP码 | 常见含义 | 定位方向 |
-|---|---|---|
-| 100 | Trying | 临时响应，说明请求已被接收 |
-| 180 | Ringing | 被叫振铃 |
-| 183 | Session Progress | 早期媒体/协商中 |
-| 200 | OK | 成功 |
-| 401 | Unauthorized | 注册鉴权挑战，首次出现通常正常 |
-| 403 | Forbidden | 注册或业务被禁止，关注签约、IMPU/IMPI、运营商策略 |
-| 404 | Not Found | 用户或路由不存在 |
-| 408 | Request Timeout | 请求超时，关注网络、P-CSCF、传输链路 |
-| 480 | Temporarily Unavailable | 对端暂不可达 |
-| 486 | Busy Here | 对端忙 |
-| 500 | Server Internal Error | IMS网络内部异常 |
-| 503 | Service Unavailable | IMS服务不可用或拥塞 |
+| SIP码 | 常见含义                    | 定位方向                          |
+| ---- | ----------------------- | ----------------------------- |
+| 100  | Trying                  | 临时响应，说明请求已被接收                 |
+| 180  | Ringing                 | 被叫振铃                          |
+| 183  | Session Progress        | 早期媒体/协商中                      |
+| 200  | OK                      | 成功                            |
+| 401  | Unauthorized            | 注册鉴权挑战，首次出现通常正常               |
+| 403  | Forbidden               | 注册或业务被禁止，关注签约、IMPU/IMPI、运营商策略 |
+| 404  | Not Found               | 用户或路由不存在                      |
+| 408  | Request Timeout         | 请求超时，关注网络、P-CSCF、传输链路         |
+| 480  | Temporarily Unavailable | 对端暂不可达                        |
+| 486  | Busy Here               | 对端忙                           |
+| 500  | Server Internal Error   | IMS网络内部异常                     |
+| 503  | Service Unavailable     | IMS服务不可用或拥塞                   |
 
 ## CS Call Q.850 常见方向
 
