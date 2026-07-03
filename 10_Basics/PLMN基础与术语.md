@@ -14,18 +14,18 @@ search_tier: supplemental
 
 ## 术语速查
 
-| 术语 | 含义 | 定位时关注点 |
-|---|---|---|
-| HPLMN | Home PLMN，归属 PLMN，通常由 IMSI MCC/MNC 决定 | 是否把归属网误判成漫游网 |
-| EHPLMN | Equivalent HPLMN，与 HPLMN 等价的 PLMN | 是否影响归属网优先级和显示 |
-| RPLMN | Registered PLMN，上次成功注册的 PLMN | 开机和回网时是否优先尝试 |
-| EPLMN | Equivalent PLMN，与当前注册 PLMN 等价的 PLMN | TAU / 小区重选后是否仍允许驻留 |
-| UPLMN | User Controlled PLMN，用户控制优选 PLMN | SIM EF 或用户配置是否影响顺序 |
-| OPLMN | Operator Controlled PLMN，运营商控制优选 PLMN | 运营商优选列表是否影响选网 |
-| FPLMN | Forbidden PLMN，禁止 PLMN | Attach/TAU reject 后是否被加入禁止列表 |
-| VPLMN | Visited PLMN，拜访 PLMN | 漫游场景和 HPLMN 周期搜索 |
-| RAT | Radio Access Technology，制式 | 同一 PLMN 下 LTE/NR/WCDMA/GSM 优先级 |
-| suitable cell | 适合驻留的小区 | PLMN、barred、S 准则、TAC/LAI 是否满足 |
+| 术语            | 含义                                    | 定位时关注点                         |
+| ------------- | ------------------------------------- | ------------------------------ |
+| HPLMN         | Home PLMN，归属 PLMN，通常由 IMSI MCC/MNC 决定 | 是否把归属网误判成漫游网                   |
+| EHPLMN        | Equivalent HPLMN，与 HPLMN 等价的 PLMN     | 是否影响归属网优先级和显示                  |
+| RPLMN         | Registered PLMN，上次成功注册的 PLMN          | 开机和回网时是否优先尝试                   |
+| EPLMN         | Equivalent PLMN，与当前注册 PLMN 等价的 PLMN   | TAU / 小区重选后是否仍允许驻留             |
+| UPLMN         | User Controlled PLMN，用户控制优选 PLMN      | SIM EF 或用户配置是否影响顺序             |
+| OPLMN         | Operator Controlled PLMN，运营商控制优选 PLMN | 运营商优选列表是否影响选网                  |
+| FPLMN         | Forbidden PLMN，禁止 PLMN                | Attach/TAU reject 后是否被加入禁止列表   |
+| VPLMN         | Visited PLMN，拜访 PLMN                  | 漫游场景和 HPLMN 周期搜索               |
+| RAT           | Radio Access Technology，制式            | 同一 PLMN 下 LTE/NR/WCDMA/GSM 优先级 |
+| suitable cell | 适合驻留的小区                               | PLMN、barred、S 准则、TAC/LAI 是否满足  |
 
 ## 定位口径
 
