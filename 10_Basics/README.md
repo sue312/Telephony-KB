@@ -22,6 +22,8 @@ search_tier: main_entry
 | [[CauseCode与缩写]] | EMM/ESM/5GMM/SIP/Q.850 cause、常用 log 标签、缩写、标签体系 |
 | [[PLMN基础与术语]] | HPLMN、RPLMN、EPLMN、FPLMN、VPLMN、RAT、suitable cell 等基础概念 |
 | [[3GPP协议阅读方法]] | 3GPP 官网、协议编号、协议栈和目录阅读方法 |
+| [[RF基础概念]] | RF 信号链、dB/dBm、链路预算、PA/ASM/eLNA/RFFE、RSRP/RSRQ/SINR、TRP/TIS 和自检边界 |
+| [[手机连接基站与数据传输基础]] | UE—无线接入网—核心网总体链路、找网/接入、数据转发与多用户无线资源共享的科普入口 |
 | [[通信基础概念]] | FDN 等基础概念补充 |
 | [[SIM-USIM-EF文件速查]] | IMSI、ICCID、SPN、PNN/OPL、PLMNwACT、SMSP、ECC、FDN 等 SIM/USIM EF 文件速查 |
 
