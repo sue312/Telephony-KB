@@ -35,13 +35,15 @@ search_tier: main_entry
 | [[MTK/Telephony代码架构速查]] | MTK RIL / RFX / Rtc/Rmc/Rmm handler、注册态和 IA APN 代码入口 |
 | [[MTK/MTK-Online-QuickStart入口地图]] | MTK Online Modem / Telephony QuickStart 栏目入口，按 NAS/RRC/IMS/Data/SBP/NVRAM/Telephony 问题选资料 |
 | [[MTK/MTK-Modem编译环境配置]] | MTK modem 编译环境配置 |
+| [Qualcomm平台代码](Qualcomm/README.md) | Qualcomm Modem、RF Card/FEM、MCFG、编译产物和打包链路入口 |
+| [[Qualcomm/Qualcomm-Modem-RF配置与编译链路]] | Qualcomm RF Card、FEM/RFFE、RF NV、RF Target 的配置、生成、链接、RFPD 和打包边界 |
 
 ## 建议阅读顺序
 
 1. 先看 [[Cross-Platform/Telephony系统架构|Telephony系统架构]]，确认 AP、RIL、vendor RIL、modem、IMS 的边界。
 2. 再看 [[Cross-Platform/Telephony函数级入口速查|Telephony函数级入口速查]]，按现象定位函数、handler 和 log 证据。
 3. 再看 [[Cross-Platform/平台代码与产物速查|平台代码与产物速查]]，按 MTK / UNISOC / Qualcomm 找具体代码入口和产物链路。
-4. 如果已经确定平台，直接进入 [[UNISOC/Telephony代码架构速查]] 或 [[MTK/Telephony代码架构速查]]。
+4. 如果已经确定平台，直接进入 [[UNISOC/Telephony代码架构速查]]、[[MTK/Telephony代码架构速查]] 或 [[Qualcomm/README|Qualcomm平台代码]]。
 5. 如果问题是 AP 状态不同步，优先对齐 RIL response、`NetworkRegistrationInfo`、`ServiceStateTracker`。
 6. 如果问题是产物或 patch，优先对齐 patch list、modem image、编译流水线参数和刷入版本。
 

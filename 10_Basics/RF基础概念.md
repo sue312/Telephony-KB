@@ -254,6 +254,7 @@ RSRP 很强但 SINR 较差时，网络仍可能使用较低 MCS。吞吐量还�
 
 ## 关联文档
 
+- [[50_Platform-Code/Qualcomm/Qualcomm-Modem-RF配置与编译链路]]
 - [无线信号与搜网失败排查](../30_Troubleshooting/无线信号与搜网失败排查.md)
 - [Data业务流程](../20_Service-Flows/Data/Data业务流程.md)
 - [BLE远距离链路与OTA指标](../20_Service-Flows/BT/BLE远距离链路与OTA指标.md)

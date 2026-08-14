@@ -60,6 +60,7 @@ PowerShell -ExecutionPolicy Bypass -File F:\Codex\Knowledge\Telephony-KB\70_Tool
 | [[IMS配置方法]] | IMS 注册、MTK SBP/DSBP/CXP、VoWiFi IKE、SIP 403 配置与证据口径 |
 | [[MTK-配置关系与生效链路]] | MTK 支持能力、feature option、CarrierConfig、IMS Config、SBP/NVRAM、APN/RAT mode 的统一检查链 |
 | [[MTK-WFC-ePDG配置与排查索引]] | MTK VoWiFi / ePDG 的 FQDN、DNS、IKE/ESP、证书、DPD、roaming handover 参数链 |
+| [[Qualcomm-MCFG运营商配置与生效链路]] | Qualcomm MCFG HW/SW、SIM匹配、variants白名单、运营商NV聚合、运行时激活和打包验证 |
 | [ECC配置方法_重构](Core-Config/ECC配置方法_重构.md) | UNISOC A15/A16 `uniecc` 配置入口、生成物和加载链路 |
 | [业务配置方法](Business-Config/README.md) | SMS、补充业务、SIMLock、User-Agent、网络制式图标、卫星通信、小区广播、运营商名称 |
 | [SMS配置方法](Business-Config/SMS配置方法.md) | SMSC、FDN、短码、Voicemail 号码来源和配置边界 |
