@@ -25,6 +25,7 @@ Modem assert、SSR、radio restart、稳定性、长稳、弱网触发崩溃相�
 | [[2025-06-27_Stability_MTK_Patch导致ModemEE]] | MTK patch 引入 IMS call retry 崩溃 | patch 回归和 CR 依赖排查样例 |
 | [[2025-06-25_Stability_UNISOC_CA能力上报异常导致ModemAssert]] | 注册后无法上网并 modem assert | 检查 UE capability 上报 CA 组合是否超平台能力 |
 | [[2025-08-01_Stability_UNISOC_ModemBlocked]] | 展锐 modem blocked 现场 | blocked 问题证据保全和规避边界 |
+| [[2026-07-28_Stability_MTK_RFIC版本读取失败Modem不起_3DXray确认虚焊]] | 售后两台 Modem 反复 Assert、不识卡 | 从 line 156 RFIC version 回读失败追到 3D X-ray 确认 RFIC 虚焊 |
 | [[Imported_Stability_G100_通话过程中ModemAssert_PWM32K时钟源]] | G100 通话过程中 modem assert | BSP 灯环 PWM 32K clock source 占用总线诱发 modem assert |
 
 建议命名：

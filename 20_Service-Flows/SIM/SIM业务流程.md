@@ -13,6 +13,7 @@ search_tier: supplemental
 
 - 本文是迁入/补充资料，先按本节入口定位，再看正文和来源记录。
 - 可复用结论应沉淀到主流程/配置/排障/case；本文只保留溯源材料和操作细节。
+- Qualcomm eSIM 从 Modem 上电、QMI/QCRIL、Android UICC 到 LPA/Profile 的全链路见 [[Qualcomm-eSIM启动流程与全栈排查]]。
 
 SIM 域流程统一放在这里：卡识别、UICC 状态、SIM READY、初始化 AP/modem log 证据。
 
