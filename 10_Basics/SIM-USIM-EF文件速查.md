@@ -26,9 +26,29 @@ search_tier: supplemental
 | `EF_PLMNwACT` | 用户/卡侧优选 PLMN 及接入技术 | 自动选网优先级 | PLMN 选择 |
 | `EF_OPLMNwACT` | 运营商控制优选 PLMN 及接入技术 | 自动选网优先级 | PLMN 选择 |
 | `EF_FPLMN` | Forbidden PLMN | reject 后禁用/避让 PLMN | 注册失败 |
+| `EF_AD` / `6FAD` | Administrative Data | SIM operation mode、MNC 长度等管理数据 | 白卡模式、MCC/MNC 解析、Operator NV 匹配 |
 | `EF_ECC` | Emergency Call Codes | 有卡紧急号码 | ECC |
 | `EF_SMSP` | SMS Parameters | SMSC / 短信参数 | SMS 发送 |
 | `EF_ADN` / `EF_MBDN` | 电话本 / Mailbox Dialling Number | voicemail retrieval number 等 | Voicemail |
+
+## 白卡 `EF_AD` 与 Operator NV
+
+白卡验证 UNISOC Operator NV 前，除了写入目标 IMSI/PLMN，还要检查 `EF_AD/6FAD`。历史实机问题中读到：
+
+```text
+AT+CRSM=176,28589,0,0,4,0,"3F007FFF"
++CRSM: 144,0,80000002
+```
+
+`28589=0x6FAD`。`80 00 00 02` 的第 1 字节 `0x80` 表示 Type Approval / test operation，第 4 字节 `0x02` 表示 MNC 长度为 2。按展锐平台分析，首字节为 `0x80` 或 `0x81` 时会被识别为测试卡，Operator NV 不按普通运营商卡路径加载/应用。
+
+验证 2 位 MNC 的普通卡场景时，可保持末字节不变并做单变量对比：
+
+```text
+80 00 00 02 -> 00 00 00 02
+```
+
+改卡后重新上电。日志出现目标 `mccmnc` 只证明 MCC/MNC 解析完成；Operator NV 是否生效还要结合 profile 选择、running item 和最终业务行为判断。真实案例见 [[../40_Case-Library/Data/2026-09-03_Data_UNISOC_白卡EF_AD测试模式导致XCAP复用默认承载]]。
 
 ## PLMN 列表容量
 

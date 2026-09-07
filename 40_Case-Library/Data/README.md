@@ -16,6 +16,7 @@ APN、默认承载/PDU Session、DNS、TCP、代理、吞吐量、快速回 4G �
 |---|---|---|
 | [[2024-11-13_Data_UNISOC_MMS大小限制CarrierConfig]] | MMS 大小限制调整 | 通过 CarrierConfig 按运营商覆盖 MMS max message size |
 | [[2022-10-31_Data_UNISOC_APN_XCAP类型被隐藏]] | APN xcap type 不显示 | 检查 APN XML、数据库和 CarrierConfig 隐藏列表 |
+| [[2026-09-03_Data_UNISOC_白卡EF_AD测试模式导致XCAP复用默认承载]] | 42004 白卡执行 UT 时未建立独立 XCAP 承载 | 检查 `EF_AD/6FAD` 测试卡判定、Operator NV 运行值和实际 APN/NSAPI |
 | [[2026-04-24_Data_UNISOC_RTOS_DataPDN按需激活后主动释放]] | 注册后几分钟 UE 主动释放 data PDN | 区分按需激活策略、上层去激活和协议层 PDN disconnect |
 | [[2026-05-08_Data_UNISOC_CGDCONT修改APN不触发PDN重建]] | AT+CGDCONT 修改 APN 后未自动断链重建 | 区分 PDP context 定义和 PDN disconnect/connect |
 | [[2026-01-20_Data_UNISOC_India注册4G但DNS超时无法上网]] | India 注册 4G 但无网络 | 用 NetworkMonitor/netlog 定位 DNS 超时和 TCP 重传 |

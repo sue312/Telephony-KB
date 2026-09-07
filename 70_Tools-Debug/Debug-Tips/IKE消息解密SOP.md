@@ -45,6 +45,34 @@ PayLoadDump:SK_er
 
 ![](../../attachments/outline/994463b2-a7e1-4548-8cad-8b41ce367ebd.png)
 
+## 解密后显示 `Malformed Packet` 的判定
+
+> [!warning]
+> `Malformed Packet` 只说明当前解析结果非法，不能单独证明网络发送了畸形 IKE 报文。SPI、方向密钥、算法或密钥长度错误，都可能把正常密文解成随机 Payload。
+
+按以下顺序检查：
+
+1. 确认抓包和 Modem log 属于同一次 IKE SA，`Initiator SPI`、`Responder SPI`、Message ID 一致。
+2. 确认方向：UE 发送使用 `SK_ei/SK_ai`，ePDG 响应使用 `SK_er/SK_ar`。
+3. 检查密钥声明长度与实际内容，特别留意零尾、全零和固定边界截断。
+4. 若 `SK_ar` 可以通过响应完整性校验，但 `SK_er` 解密后出现非法 next payload、reserved、payload length 或 padding，优先检查终端密钥派生/保存和 Wireshark 密钥表。
+5. 只有使用已确认正确的完整密钥仍无法通过完整性和结构校验时，才继续怀疑报文传输损坏或网络侧生成异常。
+
+### PRF+ 轮次检查
+
+密钥存在零尾、全零或固定边界截断时，不能只检查单个密钥的声明长度，还要核算整段 key material：
+
+```text
+total_key_len = 所有待派生密钥的实际长度之和
+rounds = ceil(total_key_len / prf_output_len)
+```
+
+例如某次 IKE SA 需要 `252 bytes`，PRF 单轮输出 `20 bytes`，则至少需要 `13` 轮。若只得到 `200 bytes`，等价于只产出 `10` 个 PRF block，后续密钥可能出现零尾或全零。具体算法数值与 PRF 输出长度应以目标平台运行日志和 schema 为准。
+
+相关案例：
+
+- [[../../40_Case-Library/IMS/2026-09-03_VoWiFi_UNISOC_41903_PRF密钥展开截断导致IKE_AUTH解密失败|UNISOC 41903 VoWiFi：PRF+ 密钥展开在 200 字节处截断]]
+
 ## MTK 解密流程
 
 1. 使用 modem log 工具回放 modem log。

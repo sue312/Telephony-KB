@@ -15,32 +15,33 @@ search_tier: main_entry
 
 | 维度 | 值 | 数量 |
 |---|---|---:|
-| Domain | Call | 16 |
-| Domain | Data | 12 |
-| Domain | IMS | 8 |
+| Domain | Call | 17 |
+| Domain | Data | 13 |
+| Domain | IMS | 10 |
 | Domain | Registration | 23 |
 | Domain | Signal | 3 |
 | Domain | SIM | 24 |
 | Domain | SMS | 4 |
-| Domain | Stability | 20 |
+| Domain | Stability | 21 |
 | Domain | Supplementary-Service | 2 |
 | Platform | Android | 1 |
 | Platform | Mixed | 29 |
-| Platform | MTK | 17 |
+| Platform | MTK | 20 |
 | Platform | MTK/UNISOC | 1 |
-| Platform | UNISOC | 64 |
-| 第一坏点分类 | Call / SS / ECC | 19 |
-| 第一坏点分类 | Data / APN / ESM | 16 |
+| Platform | UNISOC | 66 |
+| 第一坏点分类 | Call / SS / ECC | 20 |
+| 第一坏点分类 | Data / APN / ESM | 17 |
 | 第一坏点分类 | EMM / PLMN / Registration | 18 |
-| 第一坏点分类 | IMS / SIP | 8 |
+| 第一坏点分类 | IMS / SIP | 10 |
 | 第一坏点分类 | RRC / RF / Cell | 3 |
 | 第一坏点分类 | SIM / EF / Card | 24 |
 | 第一坏点分类 | SMS / CB / FDN | 4 |
-| 第一坏点分类 | Stability / NV / Modem | 20 |
+| 第一坏点分类 | Stability / NV / Modem | 21 |
 | Status | closed | 4 |
-| Status | summarized | 96 |
+| Status | open | 2 |
+| Status | summarized | 99 |
 | Status | summarized_with_log_gap | 12 |
-| SearchTier | case_summary | 108 |
+| SearchTier | case_summary | 113 |
 | SearchTier | supplemental | 4 |
 
 ## 全量索引
@@ -51,6 +52,7 @@ search_tier: main_entry
 | [CS通话杂音](Call/Imported_Call_09_CS通话杂音.md) | Call | Mixed | Call / SS / ECC | 'RF/Modem' | high | summarized | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'CSFB 后 3G serving cell 质量差：ECNO=-21、RSCP=-63' |
 | [vowifi 无法拨打电话](Call/Imported_Call_04_vowifi_无法拨打电话.md) | Call | Mixed | Call / SS / ECC | 'IMS/IWLAN/ECC' | low | summarized_with_log_gap | 'Old Outline knowledge base; split from 通话问题案例补充.md' | '证据缺口在 VoWiFi ECC 域选与 IMS emergency 建呼链路，当前 markdown 只有 PPT 附件' |
 | [一台DUT插联通卡通话正常，其它DUT fail；插移动卡问题不复现](Call/Imported_Call_07_一台DUT插联通卡通话正常_其它DUT_fail_插移动卡问题不复现.md) | Call | Mixed | Call / SS / ECC | 'RF/Modem' | high | summarized | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'Fail DUT log 提示 no RF calibration data，随后 MT CSFB 到 3G 扫频但未完成 3G 驻留' |
+| [405854/RJIO SRVCC 过程中 srvcc_cap=0 导致 BYE](Call/2026-06-25_Call_SRVCC_405854_RJIO_srvcc_cap为0导致BYE.md) | Call | MTK | Call / SS / ECC | IMS/Modem/OperatorProfile | high | summarized | F:\\Log\\SRVCC\\debuglogger; F:\\Log\\SRVCC\\62130\\debuglogger | SRVCC 开始时 VoLTE UA 打印 srvcc cap: 0x00，随后立即释放 IMS session 并发送 BYE |
 | [LA Réunion重定向](Call/Imported_Call_03_LA_Réunion重定向.md) | Call | MTK | Call / SS / ECC | 'Config/Modem/AP' | high | summarized | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'eccdata / EccList 中 RE 的 15、17、18 本地配置与运营商期望不一致' |
 | [SRVCC Claro切换掉话](Call/2025-W22_Call_SRVCC_Claro切换掉话.md) | Call | MTK | Call / SS / ECC | IMS/Modem/Network | medium | summarized_with_log_gap | internal weekly technical case | 证据缺口在 SRVCC 切换阶段：需要先确认能力协商是否匹配，再看 mobility / CS 承接 / release cause |
 | [urn:service:sos.police问题](Call/Imported_Call_01_urnservicesos.police问题.md) | Call | MTK | Call / SS / ECC | 'Network/Modem' | high | summarized | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'RIL 上报 network ECC category:31 后，SIP emergency URN 映射成 urn:service:sos.police' |
@@ -75,14 +77,17 @@ search_tier: main_entry
 | [Phoenix视频加载失败DNS无响应](Data/2023-12-04_Data_UNISOC_Phoenix视频加载失败DNS无响应.md) | Data | UNISOC | Data / APN / ESM | AP/Modem/Network | medium | summarized | CQWeb SPCSS01265370 | 14:19~14:20 DNS 解析无响应，随后 CELLULAR validation failed |
 | [RTOS Data PDN按需激活后主动释放](Data/2026-04-24_Data_UNISOC_RTOS_DataPDN按需激活后主动释放.md) | Data | UNISOC | Data / APN / ESM | Modem/L4/PDP Manager/Application | high | summarized | CQWeb SPCSS01652533 | PDP Manager 收到 MMIAPIPDP_Deactive/app_handler 请求，传导到协议层 PDN disconnect |
 | [Safaricom Wi-Fi切蜂窝被重定向](Data/2023-10-27_Data_UNISOC_Safaricom_WiFi切蜂窝被重定向.md) | Data | UNISOC | Data / APN / ESM | AP/NetworkMonitor/Network | medium | summarized | CQWeb SPCSS01246382 | ConnectivityService validation failed with redirect to safaricom.zerod.live；APN 配置成功/失败前后无差异 |
+| [白卡 `EF_AD` 测试模式导致 XCAP 复用默认承载](Data/2026-09-03_Data_UNISOC_白卡EF_AD测试模式导致XCAP复用默认承载.md) | Data | UNISOC | Data / APN / ESM | SIM EF / Operator NV / Modem SS / Data bearer | high | open | F:/Log/A01/A01_XCAP/2026-09-03-16-45-38_42004_XCAP | SIM 初始化读到 EF_AD=80000002，首字节 0x80 触发 UNISOC 测试卡判定 |
 | [SMS短码CTS配置不匹配](IMS/2025-W20_IMS_SMS短码CTS配置不匹配.md) | IMS | Android | IMS / SIP | Framework/Telephony | medium | summarized | internal weekly technical case | `SmsUsageMonitorShortCodeTest#testSmsShortCodeDestination` 报 expected:<1> but was:<3> |
 | [DUT视频通话闪退](Call/Imported_Call_10_DUT视频通话闪退.md) | IMS | Mixed | IMS / SIP | 'IMS/ESM/AP/Modem' | medium | summarized_with_log_gap | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'ViLTE 建呼中缺少 QCI2 dedicated bearer，AP 侧 `RIL_IMS_REQUEST_SET_VIDEO_RESOLUTION` 返回 RADIO_NOT_AVAILABLE' |
 | [HMD VoLTE 注册 403：网络 IMEI 校验失败](IMS/Imported_IMS_01_HMD场测反馈_VoLTE_注册_403.md) | IMS | Mixed | IMS / SIP | IMS/Modem/Network | high | summarized | Old Outline knowledge base; split from IMS问题案例补充.md | SIP/IMS 注册阶段网络返回 403 Forbidden: IMEI check failed |
 | [Spark VoWiFi 注册失败：IKE 完整性算法配置错误](IMS/Imported_IMS_03_6032+_Spark反馈WFC注册有问题.md) | IMS | Mixed | IMS / SIP | Modem/IKE/IMS | high | summarized | Old Outline knowledge base; split from IMS问题案例补充.md | IKE_SessCheckAlgorithms unsupported integ algo:18，导致 IKE_ATTACH_FAILED |
+| [Case: MTK 46001/CU DSBP 未打开导致 SMS over IMS 不注册](IMS/2026-07-02_IMS_MTK_CU_DSBP未打开导致SMS-over-IMS不注册.md) | IMS | MTK | IMS / SIP | AP vendor property / RIL / Modem DSBP / IMSM / ImsSmsDispatcher | high | summarized | F:\\Log\\WM18短信无法发送\\debuglogger; F:\\Log\\WM18短信无法发送\\pass\\debuglogger; F:\\Log\\WM18短信无法发送\\MP6debuglogger\\debuglogger; F:\\Log\\WM18短信无法发送\\SMSOIP\\debuglogger | RIL 下发 AT+EDSBP=0，modem 侧 DSBP disable / SIM_SBP_ID:-1，导致没有 +ESBPID:0,2 和 IMSM sbp_id[2] |
 | [Iran 43211 IMS 不注册：MTK SBP / MNCMCC whitelist 未命中](IMS/Imported_IMS_02_Iran_无法注册IMS问题.md) | IMS | MTK | IMS / SIP | AP/CCCI/Modem/IMC/SBP | high | summarized | Old Outline knowledge base; split from IMS问题案例补充.md | IMC_REG condition check failed: IMC_REG_CHECK_MNCMCC_FAILED before IMS PDN connectivity request |
 | [SMS over IP / SMS over IMS 配置缺失](IMS/2025-07-29_IMS_SMS-over-IP配置缺失.md) | IMS | MTK | IMS / SIP | IMS/SDM/Modem/Network | medium | summarized | internal technical case and imported SMS Outline notes | 未同时满足 IMS 注册可用、SMS over IP allowed、SGs 不优先、IMS profile sms_support/sms_network_types 打开 |
 | [DUT视频通话卡死](Call/Imported_Call_11_DUT视频通话卡死.md) | IMS | UNISOC | IMS / SIP | 'IMS/RTP/AP/Modem' | medium | summarized_with_log_gap | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'modem/TCPIP 可见 audio/video 数据交互正常，缺少 AP media/render/UI 卡死证据' |
 | [RTT 通话](Call/Imported_Call_05_RTT_通话.md) | IMS | UNISOC | IMS / SIP | 'Dialer/IMS/IWLAN/Modem' | medium | summarized | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'AP Dialer RTT 能力/入口限制，而不是 VoWiFi 注册或 modem RTT 承载失败' |
+| [UNISOC 41903 VoWiFi 注册失败：IKE PRF+ 密钥展开在 200 字节处截断](IMS/2026-09-03_VoWiFi_UNISOC_41903_PRF密钥展开截断导致IKE_AUTH解密失败.md) | IMS | UNISOC | IMS / SIP | Modem/IKE/Crypto/IMS | high | open | F:/Log/A01/A01_VOWIFI/2026-09-03-10-47-15_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-03-17-33-50_REF_41903 VOWIFI | IKE_SA_INIT 后生成的 SK_er 仅前 20/32 字节有效，后 12 字节为 0；SK_pi/SK_pr 全 0，密钥展开恰在累计 200 字节处停止 |
 | [CM52在宁波实验室测试，待机功耗高](Registration/Imported_Registration_09_CM52在宁波实验室测试_待机功耗高.md) | Registration | MTK | Call / SS / ECC | 'Modem/NWSEL/Power' | high | summarized | 'Old Outline knowledge base; split from 注网问题案例补充.md' | '无支持 ECC 小区时 modem 持续搜网，合入降低紧急搜网频率 patch 后功耗下降' |
 | [2026-05-14 MTK LTE开机注册成功](Registration/2026-05-14_Registration_MTK_LTE开机注册成功.md) | Registration | MTK | Data / APN / ESM | AP/Modem/Network | high | closed | 'F:\Log\流程Log\MTKLte注册流程\debuglogger' | none |
 | [MP6漫游失败](Registration/Imported_Registration_05_MP6漫游失败.md) | Registration | MTK | Data / APN / ESM | APN/Modem/Network | medium | summarized | Old Outline knowledge base; split from 注网问题案例补充.md | AT +EGREG 已显示 roaming 注册成功，但打开漫游后仍无 PDP 请求，首坏点转为 APN 匹配 |
@@ -147,6 +152,7 @@ search_tier: main_entry
 | [WM58 OTA跨版本升级，出现Modem Assert](Stability/Imported_SIM_13_WM58_OTA跨版本升级_出现Modem_Assert.md) | Stability | Mixed | Stability / NV / Modem | 'RF/Modem' | high | summarized | 'Old Outline knowledge base; split from SIM问题案例补充.md' | '升级后版本的 RF_PARA_CUSTOM 指向错误 RF parameter' |
 | [G100 通话过程中，出现Modem Assert](Stability/Imported_Stability_G100_通话过程中ModemAssert_PWM32K时钟源.md) | Stability | MTK | Stability / NV / Modem | 'BSP/PWM/Modem' | high | summarized | 'Old Outline knowledge base; split from SIM问题案例补充.md' | 'ccci modem assert 指向 lte_scheduler.c，同时二分定位到灯环 PWM 32K clock source' |
 | [MTK Patch导致ModemEE](Stability/2025-06-27_Stability_MTK_Patch导致ModemEE.md) | Stability | MTK | Stability / NV / Modem | Modem/IMS | medium | summarized | internal weekly technical case | VDM 在 IMS call retry 期间访问 call_id，错误取值 255 后触发 crash |
+| [MTK RFIC 版本读取失败导致 Modem 反复 Assert（3D X-ray 确认虚焊）](Stability/2026-07-28_Stability_MTK_RFIC版本读取失败Modem不起_3DXray确认虚焊.md) | Stability | MTK | Stability / NV / Modem | Modem/MML1/MMRF/RFIC/HW | high | summarized | 售后 DebugLogger AP kernel log / MTK FAQ33228 / 3D X-ray | mml1_rf_error_check.c line 156，期望 RFIC 版本 0x02，RFIC1/RFIC2 回读均为 0x00 |
 | [WM58从有锁网升级下载到无锁网，Modem Assert](Stability/Imported_SIM_03_WM58从有锁网升级下载到无锁网_Modem_Assert.md) | Stability | MTK | Stability / NV / Modem | 'Config/Modem/AP' | medium | summarized | 'Old Outline knowledge base; split from SIM问题案例补充.md' | 'nvram_main.c line 2192，para0=0x0000ef11 指向 SML/NVRAM 数据保护' |
 | [A/B OTA 在 nvmerge 前中断的 fixnv 风险](Stability/2023-09-18_Stability_UNISOC_AB_OTA_nvmerge前中断fixnv风险.md) | Stability | UNISOC | Stability / NV / Modem | update_engine / postinstall / NV partition | high | summarized | CQWeb SPCSS01234705 | update_engine 写入 l_fixnv1/l_fixnv2 后，在 Running /postinstall/bin/nvmerge 之前被打断 |
 | [CA 能力上报异常导致 Modem Assert](Stability/2025-06-25_Stability_UNISOC_CA能力上报异常导致ModemAssert.md) | Stability | UNISOC | Stability / NV / Modem | Modem/LTE PHY/UE capability | high | summarized | CQWeb SPCSS01521496 | LTE_DL_SCH0_TASK PHY CP assert in afc_aaal.c after unsupported CA configuration |

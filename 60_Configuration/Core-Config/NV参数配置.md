@@ -146,6 +146,30 @@ NV 问题的核心不是“配置文件里有没有写”，而是确认目标�
 4. 如果需要批量差分 Operator NV，先确认当前工具链是否支持；不支持时要走完整 NV 工程修改/编译流程。
 5. 如果项目依赖人工注释维护 Operator NV，记录 NVTool 版本；`R1.22.3301` 之后历史反馈已支持不删除注释，但保存顺序仍会按去重和 `default.nv` 模板重排。
 
+### UNISOC 白卡测试 Operator NV 前置检查
+
+UNISOC 白卡测试不能只写目标 IMSI/PLMN。先读取 `EF_AD/6FAD`，确认 operation mode 没有把卡置为平台测试卡模式：
+
+| 检查项 | 判定口径 |
+|---|---|
+| `EF_AD` 首字节 | `0x80` / `0x81` 会被展锐识别为测试卡，可能跳过普通运营商 Operator NV 的加载/应用路径 |
+| `EF_AD` 第 4 字节 | 保留目标 MNC 长度，例如 `0x02` 表示 2 位 MNC |
+| `update mccmnc=...` | 只证明 MCC/MNC 已解析，不证明 Operator NV 已加载 |
+| `[DELTA NV] ... already loaded` | 只证明某类 NV 已加载，不能单独证明选中了目标运营商 profile |
+| AP DataProfile | AP 有 `xcap` / `ims` profile，不等于 CP 已采用同运营商 Operator NV |
+
+最小验证链路：
+
+```text
+EF_AD operation mode
+-> 目标 MCC/MNC
+-> Operator profile 选择
+-> 目标 item running value
+-> 实际协议/业务行为
+```
+
+如果白卡为 2 位 MNC，且当前值是 `80000002`，应优先按供应商建议单独改为 `00000002` 后重新上电复测，避免同时修改 UT、APN 等多个 NV，导致无法判断哪个变量生效。案例见 [[../../40_Case-Library/Data/2026-09-03_Data_UNISOC_白卡EF_AD测试模式导致XCAP复用默认承载]]。
+
 ### Operator NV 保存顺序与注释边界
 
 `SPCSS01287053` 的关键结论是：NVTool 保存 Operator NV 时，会同步保存 delta NV 和 NV 工程。保存 delta NV 阶段工具会做去重，并结合 `default.nv` 模板顺序重排。这个行为不一定影响 NV bin 生成，但会影响人工 review 时的 diff 可读性。

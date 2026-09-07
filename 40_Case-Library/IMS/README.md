@@ -23,6 +23,7 @@ IMS、VoLTE、VoWiFi、VoNR、SMS over IMS、UT、视频通话相关 case 放这
 | [[Imported_IMS_01_HMD场测反馈_VoLTE_注册_403]] | VoLTE 注册返回 403 `IMEI check failed` | 区分运营商 IMEI 备案拒绝和本地 IMS 配置问题 |
 | [[Imported_IMS_02_Iran_无法注册IMS问题]] | LTE 正常但 MTK 不发起 IMS PDN | 按 IMC 条件、SBP/DSBP/CXP 和 MNCMCC whitelist 定位 |
 | [[Imported_IMS_03_6032+_Spark反馈WFC注册有问题]] | VoWiFi IKE 建链失败 | 用 `unsupported integ algo` 定位 IKE 配置错误 |
+| [[2026-09-03_VoWiFi_UNISOC_41903_PRF密钥展开截断导致IKE_AUTH解密失败]] | 41903 VoWiFi 首个 IKE_AUTH 解密失败 | 区分网络报文异常与终端 PRF+ 密钥展开截断 |
 | [[2025-07-29_IMS_SMS-over-IP配置缺失]] | 运营商要求 SMS over IP，但域选择或 IMS profile 未打开 | SMS over IP 配置和域选择闭环 |
 | [[2025-W20_IMS_SMS短码CTS配置不匹配]] | CTS 短码分类和项目 XML 不匹配 | 对齐 `sms_short_codes.xml` 与 CTS 版本 |
 | [[Imported_Call_05_RTT_通话]] | RTT over VoWiFi | 区分 Dialer RTT 入口能力和底层 IMS/VoWiFi RTT 承载 |
