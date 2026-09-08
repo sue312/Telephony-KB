@@ -14,9 +14,9 @@ operator: 41903 / Ooredoo Kuwait
 project: A01
 chipset: qogirl6
 vendor_customization: Operator NV / IKE proposal
-android_version: TBD
-modem_version: FAIL 4G_MODEM_22B_W24.36.3; REF 4G_MODEM_22B_W25.45.3; PATCH 临时验证版本号待归档
-source_log: "F:/Log/A01/A01_VOWIFI/2026-09-03-10-47-15_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-03-17-33-50_REF_41903 VOWIFI"
+android_version: Android 15 / A127
+modem_version: FAIL 4G_MODEM_22B_W24.36.3; REF 4G_MODEM_22B_W25.45.3; PATCH 基线仍报 4G_MODEM_22B_W24.36.3，临时 Patch change ID 待归档
+source_log: "F:/Log/A01/A01_VOWIFI/2026-09-03-10-47-15_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-03-17-33-50_REF_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-05-13-30-32_DUT_41903_VOWIFI"
 first_bad_point: "IKE_SA_INIT 后生成的 SK_er 仅前 20/32 字节有效，后 12 字节为 0；SK_pi/SK_pr 全 0，密钥展开恰在累计 200 字节处停止"
 confidence: high
 status: closed
@@ -44,9 +44,9 @@ tags:
 | 平台 | UNISOC |
 | 芯片/基线 | 问题机 `qogirl6`；REF 为 `SC9863A`，非同型号 |
 | 厂商客制化 | 41903 Operator NV / IKE proposal |
-| Android版本 | TBD |
-| Modem版本 | FAIL：`4G_MODEM_22B_W24.36.3`；REF：`4G_MODEM_22B_W25.45.3`；PATCH：展锐临时版本，构建号待归档 |
-| 原始log | `F:\Log\A01\A01_VOWIFI\2026-09-03-10-47-15_41903 VOWIFI`；`F:\Log\A01\A01_VOWIFI\2026-09-03-17-33-50_REF_41903 VOWIFI` |
+| Android版本 | Android 15，AP build `A127` |
+| Modem版本 | FAIL：`4G_MODEM_22B_W24.36.3`；REF：`4G_MODEM_22B_W25.45.3`；PATCH DUT：运行基线仍报 `4G_MODEM_22B_W24.36.3`，临时 Patch change ID 待归档 |
+| 原始log | `F:\Log\A01\A01_VOWIFI\2026-09-03-10-47-15_41903 VOWIFI`；`F:\Log\A01\A01_VOWIFI\2026-09-03-17-33-50_REF_41903 VOWIFI`；`F:\Log\A01\A01_VOWIFI\2026-09-05-13-30-32_DUT_41903_VOWIFI` |
 | 第一坏点 | IKE SA 密钥展开到累计第 200 字节后停止，`SK_er` 尾部及 `SK_pi/SK_pr` 被零填充 |
 | SIM/运营商 | `41903` / Ooredoo Kuwait，原 Wataniya Telecom |
 | RAT | LTE + IWLAN |
@@ -55,7 +55,7 @@ tags:
 
 ## 状态说明
 
-`closed`：问题机与 REF 对比、IKE 密钥材料和独立重算结果形成高置信根因证据；UNISOC 确认原因为 PRF 函数计算轮次不足，并提供按实际总密钥长度动态计算轮次的临时 Patch。2026-09-07 用户确认原 FAIL 项使用该 Patch 验证 PASS，完成“故障现象 -> 根因 -> Patch -> 功能恢复”的闭环。Patch 构建号、变更号及 PASS 日志路径仍待归档，不影响本案例的功能验证结论，但引用详细协议证据时应保留该边界。
+`closed`：问题机与 REF 对比、IKE 密钥材料和独立重算结果形成高置信根因证据；UNISOC 确认原因为 PRF 函数计算轮次不足，并提供按实际总密钥长度动态计算轮次的临时 Patch。2026-09-05 的 PATCH DUT 日志已确认密钥完整、EAP 成功、IKE attached 和 IMS over WLAN 注册；2026-09-07 用户确认原 FAIL 项验证 PASS，完成“故障现象 -> 根因 -> Patch -> 功能恢复”的闭环。日志中的运行基线仍显示 `4G_MODEM_22B_W24.36.3`，Patch change ID 及正式合入版本仍待归档。
 
 ## 用户现象
 
@@ -75,7 +75,7 @@ A01 插入 `41903` SIM，完成 LTE 注册并打开 Wi-Fi 后，VoWiFi 注册失
 同一 SIM、CMW/AP 和 ePDG 环境下，REF 能解出 EAP-AKA Challenge，随后收到 `EAP_SUCCESS` 并进入 `IKE ATTACHED`，说明 DNS、Wi-Fi、ePDG 可达性和网络侧基本流程可用。
 
 > [!success] 修复验证
-> 2026-09-07，用户确认展锐上周提供的临时 Patch 已使原 FAIL 项验证 PASS。这一 A/B 结果进一步证明 PRF 轮次计算缺陷是本次 VoWiFi 注册失败的直接根因。当前记录的是用户确认的功能结果，尚未附带 Patch 版本号及 PASS 日志明细。
+> 2026-09-05 的 PATCH DUT 日志中，`SK_er` 为完整非零 32 字节，`SK_pi/SK_pr` 均为完整非零 20 字节；随后收到 `EAP_SUCCESS`，IKE 从 `ATTACHING` 进入 `ATTACHED`。AP 侧进一步出现 `imsTransportType=WLAN`、`isWifiRegistered:true` 和 `isVowifiEnabled:true`。2026-09-07 用户确认原 FAIL 项验证 PASS。这一 A/B 结果进一步证明 PRF 轮次计算缺陷是本次 VoWiFi 注册失败的直接根因。
 
 ```text
 IKE_SA_INIT 成功
@@ -97,8 +97,11 @@ IKE_SA_INIT 成功
 - REF Modem log：`F:\Log\A01\A01_VOWIFI\2026-09-03-17-33-50_REF_41903 VOWIFI\modem\md_20260903-051903.log`
 - REF AP log：`F:\Log\A01\A01_VOWIFI\2026-09-03-17-33-50_REF_41903 VOWIFI\ap\000-0903_051835--0903_122044_poweron\0-android_main.log`
 - REF 抓包：`F:\Log\A01\A01_VOWIFI\2026-09-03-17-33-50_REF_41903 VOWIFI\ap\tcpdump\001_0903_121939_0903_122044_tcpdump.cap`
+- PATCH DUT Modem log：`F:\Log\A01\A01_VOWIFI\2026-09-05-13-30-32_DUT_41903_VOWIFI\modem\md_20241231-191714.log`
+- PATCH DUT AP main log：`F:\Log\A01\A01_VOWIFI\2026-09-05-13-30-32_DUT_41903_VOWIFI\ap\000-1231_191540--1231_191842_poweron\0-android_main.log`
+- PATCH DUT AP radio log：`F:\Log\A01\A01_VOWIFI\2026-09-05-13-30-32_DUT_41903_VOWIFI\ap\000-1231_191540--1231_191842_poweron\0-android_radio.log`
 - UNISOC 回复：建议 CPM 升级 Modem 到 `4G_MODEM_22B_W24.45.6` 或更新版本后复测。
-- 临时 Patch 验证：2026-09-07 用户确认原 FAIL 项验证 PASS；Patch 构建号、变更号和 PASS 日志路径待归档。
+- 临时 Patch 验证：2026-09-05 PATCH DUT 日志已归档；2026-09-07 用户确认原 FAIL 项验证 PASS。AP build 为 `A127`，Modem 运行基线仍报 `4G_MODEM_22B_W24.36.3`；Patch change ID 待归档。
 
 ## 时间线
 
@@ -113,7 +116,14 @@ IKE_SA_INIT 成功
 | 05:37:05.097 | FAIL Modem | 发送 `IKE_AUTH[I]`，随后收到 ePDG 响应 | 网络可达且 ePDG 有响应 | 高 |
 | 05:37:05.120 | FAIL Modem | `Ike_MsgAddId para invalid`、`Ike_DecodeIkeAuth PayldHand fail`、`DecodeMsg fail` | 错误密钥导致解密后 Payload 非法 | 高 |
 | REF 同流程 | REF Modem/AP | `EAP_SUCCESS`、`IKE_EVENT_IN_ATTACH_OK`、`ATTACHED`、`isWifiRegistered:true` | 同环境可完成 VoWiFi 注册 | 高 |
-| 2026-09-07 | PATCH 验证 | 展锐临时 Patch 下原 FAIL 项验证 PASS | 修复与根因形成 A/B 闭环 | 最高 |
+| PATCH 会话 | PATCH DUT Modem | `SK_er/SK_pi/SK_pr` 长度正确且非零 | PRF+ 已覆盖完整密钥材料 | 最高 |
+| PATCH 会话 | PATCH DUT Modem | `EAP_SUCCESS`、`E_IKE_EVENT_IN_ATTACH_OK`、`E_IKE_SESS_STATE_ATTACHED` | IKE/EAP 隧道建立成功 | 最高 |
+| 11:17:48.491 | PATCH DUT AP | `handleImsRegistered: ... imsTransportType=WLAN` | IMS 注册承载已切到 WLAN | 最高 |
+| 11:17:48.490~11:17:48.509 | PATCH DUT AP | `isWifiRegistered:true`、`isVowifiEnabled:true` | VoWiFi 注册成功 | 最高 |
+| 2026-09-07 | 用户确认 | 展锐临时 Patch 下原 FAIL 项验证 PASS | 修复与根因形成 A/B 闭环 | 最高 |
+
+> [!note] PATCH 日志时间边界
+> PATCH 目录采集日期为 2026-09-05，但设备 AP 日志内部日期显示为 `12-31`，说明 RTC/系统日期未同步。本文只使用同一日志内的 `11:17:47~11:17:48` 时分秒建立事件先后关系，不把 `12-31` 当作真实测试日期。
 
 ## 正常流程对比
 
@@ -191,6 +201,19 @@ md_20260902-053648.log:117207  Ike_SaGetSk SK_ei  len=32  非零
 md_20260902-053648.log:117208  Ike_SaGetSk SK_er  len=32  前20字节非零，后12字节全0
 md_20260902-053648.log:117209  Ike_SaGetSk SK_pi  len=20  全0
 md_20260902-053648.log:117210  Ike_SaGetSk SK_pr  len=20  全0
+
+IKE: Ike_PayLoadDumpX:Ike_SaGetSk SK_ai Size:64	
+e1514ec4ede7735e1894c4fe0edf0b14453f2251e531ca1df0bd203899c83e515eb2a65670cc46c5870f8077d4f0e69df2c791ff5bc89f1a69687e0ac83fb209	
+IKE: Ike_PayLoadDumpX:Ike_SaGetSk SK_ar Size:64	
+28f6267ff1d1deb45f99a2421e1b61c0cbf6e7c6201019c0a518f89a0ab7cfcd41d358a9460121b85d7af0f1076d536938a0f6c8d55ba5571da92b9114c35acc	
+IKE: Ike_PayLoadDumpX:Ike_SaGetSk SK_ei Size:32	
+0a0e06b34a34fb7883ba1202d0549badc949ca3d8f5e2a1c41edf5189d22a8d7	
+IKE: Ike_PayLoadDumpX:Ike_SaGetSk SK_er Size:32	
+af5de20cc662adfc42c3bc6a92773a4fa46b83dd000000000000000000000000 	
+IKE: Ike_PayLoadDumpX:Ike_SaGetSk SK_pi Size:20  	
+0000000000000000000000000000000000000000 	
+IKE: Ike_PayLoadDumpX:Ike_SaGetSk SK_pr Size:20 	
+0000000000000000000000000000000000000000
 ```
 
 | 密钥 | 长度/Byte | 累计结束位置/Byte | 问题机结果 |
@@ -241,6 +264,42 @@ md_20260903-051903.log:31904  E_IKE_SESS_STATE_ATTACHED
 
 REF 是 `SC9863A / W25.45.3`，不是 A01 同型号，只能证明 SIM、CMW/AP、ePDG 和当前算法组合可完成注册；不能单独证明 `qogirl6` 的旧 Modem 实现正确。
 
+### 5. 临时 Patch 在 A01 DUT 上恢复完整密钥与 VoWiFi 注册
+
+PATCH DUT 仍运行 A01/qogirl6，版本字符串没有升级到新的正式基线：
+
+```text
+md_20241231-191714.log:2       Platform Version: MOCORTM_22B_W24.36.3_Debug
+md_20241231-191714.log:4       BASE Version: 4G_MODEM_22B_W24.36.3
+0-phoneinfo.log:1438           ro.build.display.id = ... 601QA127 ...
+0-phoneinfo.log:1450           ro.build.version.incremental = A127
+```
+
+同一 PATCH 会话中，密钥已不再在 200 字节处截断：
+
+```text
+md_20241231-191714.log:305164  SK_er len=32 f5c02caa...af434822  # 64 hex，完整非零
+md_20241231-191714.log:305165  SK_pi len=20 14d860f8...5453271f  # 40 hex，完整非零
+md_20241231-191714.log:305166  SK_pr len=20 7b1e33b4...7eafd5fc  # 40 hex，完整非零
+md_20241231-191714.log:305848  <- [1]EAP_SUCCESS
+md_20241231-191714.log:306351  ATTACHING + E_IKE_EVENT_IN_ATTACH_OK
+md_20241231-191714.log:306359  ATTACHING -> E_IKE_SESS_STATE_ATTACHED
+```
+
+对整个 PATCH DUT Modem log 扫描，未命中原 FAIL 会话的三个关键错误：`Ike_MsgAddId para invalid`、`Ike_DecodeIkeAuth PayldHand fail`、`DecodeMsg fail`。
+
+AP 侧给出功能完成证据：
+
+```text
+0-android_radio.log:10447  11:17:47.370  IMS_UNSOL_VOWIFI_ATTACH_STATE_CHANGED 2
+0-android_radio.log:10564  11:17:48.431  IMS_UNSOL_VOWIFI_ATTACH_STATE_CHANGED 1
+0-android_radio.log:10666  11:17:48.491  handleImsRegistered ... imsTransportType=WLAN
+0-android_radio.log:10701  11:17:48.509  isVowifiEnabled=true
+0-android_main.log:21538   11:17:48.490  isRegistered:true isWifiRegistered:true ... isVoWifiEnabled():true
+```
+
+这组证据来自原 A01 DUT，弥补了 REF 机型不同的证据边界：相同 `W24.36.3` 版本字符串下叠加临时 Patch 后，密钥材料、IKE attach 和 IMS over WLAN 均恢复。由于日志没有独立的 Patch 标识，尚不能仅凭版本字符串追溯具体 change ID。
+
 ## 抓包 `Malformed Packet` 的正确解释
 
 ```text
@@ -267,6 +326,8 @@ Payload length: 21572
 - 问题机密钥材料从累计第 200 字节开始异常。
 - 完整重算的 `SK_er` 可以正确解密同一网络报文。
 - REF 在同一测试环境下进入 `EAP_SUCCESS` 和 `IKE ATTACHED`。
+- A01 DUT 叠加临时 Patch 后，`SK_er/SK_pi/SK_pr` 完整非零，进入 `EAP_SUCCESS` 和 `IKE ATTACHED`，AP 明确完成 IMS over WLAN 注册。
+- PATCH DUT 全量 Modem log 未再出现原 FAIL 会话的 `Ike_MsgAddId para invalid`、`PayldHand fail` 或 `DecodeMsg fail`。
 
 ### 供应商确认
 
@@ -283,8 +344,7 @@ Payload length: 21572
 
 ### 归档待补
 
-- 展锐临时 Patch 的构建号、commit/change ID 和正式合入分支。
-- PASS Modem/AP 日志路径，以及完整 `SK_er/SK_pi/SK_pr`、`EAP_SUCCESS`、`IKE_EVENT_IN_ATTACH_OK`、`isWifiRegistered:true` 证据。
+- 展锐临时 Patch 的 commit/change ID 和正式合入分支；现有版本字符串只能识别基线 `W24.36.3`，不能唯一识别 Patch。
 - `4G_MODEM_22B_W24.45.6` 或后续正式版本是否已合入相同修复。
 - 旧实现是固定轮次、轮次公式错误，还是长度传递错误，需要源码或变更记录确认。
 
@@ -335,7 +395,7 @@ PRF+ 必须执行足够轮次，并按顺序切分出所有 IKE 密钥；若同�
 
 | 层级 | 检查项 | 通过标准 |
 |---|---|---|
-| 版本 | Modem 运行版本 | `4G_MODEM_22B_W24.45.6` 或更新版本 |
+| 版本 | Modem 运行版本 | 正式版应为 `4G_MODEM_22B_W24.45.6` 或更新版本；临时 Patch 验证需同时记录基线与 change ID |
 | 配置 | Operator NV | 保持本次配置不变，避免多变量修改 |
 | 密钥 | `SK_er/SK_pi/SK_pr` | 长度正确，无异常零尾或全零 |
 | IKE 解码 | 首个 `IKE_AUTH[R]` | 无 `Ike_MsgAddId para invalid`、`DecodeMsg fail` |
@@ -345,7 +405,7 @@ PRF+ 必须执行足够轮次，并按顺序切分出所有 IKE 密钥；若同�
 | 稳定性 | 重复验证 | 飞行模式/Wi-Fi 开关/重启后重复注册均通过 |
 
 > [!success] 当前结果
-> 原 FAIL 项在展锐临时 Patch 下已验证 PASS（用户于 2026-09-07 确认）。上表中密钥、EAP、IKE 状态和 AP 注册关键字仍作为 PASS 日志归档检查项；在未收到新日志前，不把这些逐项写成已从 Patch 日志确认。
+> 原 FAIL 项在展锐临时 Patch 下已验证 PASS（用户于 2026-09-07 确认）。2026-09-05 PATCH DUT 日志已经逐项确认密钥完整、EAP 成功、IKE attached 和 AP `isWifiRegistered:true`。剩余事项是归档 Patch change ID，并在正式版本上复测相同检查项。
 
 如果升级后仍失败，应保留新的密钥长度打印和首个失败报文，不要同时修改 `epdg_addr_type`、DH、加密、完整性算法或 IPsec 参数。
 

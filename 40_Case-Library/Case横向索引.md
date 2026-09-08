@@ -37,8 +37,8 @@ search_tier: main_entry
 | 第一坏点分类 | SIM / EF / Card | 24 |
 | 第一坏点分类 | SMS / CB / FDN | 4 |
 | 第一坏点分类 | Stability / NV / Modem | 21 |
-| Status | closed | 4 |
-| Status | open | 2 |
+| Status | closed | 5 |
+| Status | open | 1 |
 | Status | summarized | 99 |
 | Status | summarized_with_log_gap | 12 |
 | SearchTier | case_summary | 113 |
@@ -87,7 +87,7 @@ search_tier: main_entry
 | [SMS over IP / SMS over IMS 配置缺失](IMS/2025-07-29_IMS_SMS-over-IP配置缺失.md) | IMS | MTK | IMS / SIP | IMS/SDM/Modem/Network | medium | summarized | internal technical case and imported SMS Outline notes | 未同时满足 IMS 注册可用、SMS over IP allowed、SGs 不优先、IMS profile sms_support/sms_network_types 打开 |
 | [DUT视频通话卡死](Call/Imported_Call_11_DUT视频通话卡死.md) | IMS | UNISOC | IMS / SIP | 'IMS/RTP/AP/Modem' | medium | summarized_with_log_gap | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'modem/TCPIP 可见 audio/video 数据交互正常，缺少 AP media/render/UI 卡死证据' |
 | [RTT 通话](Call/Imported_Call_05_RTT_通话.md) | IMS | UNISOC | IMS / SIP | 'Dialer/IMS/IWLAN/Modem' | medium | summarized | 'Old Outline knowledge base; split from 通话问题案例补充.md' | 'AP Dialer RTT 能力/入口限制，而不是 VoWiFi 注册或 modem RTT 承载失败' |
-| [UNISOC 41903 VoWiFi 注册失败：IKE PRF+ 密钥展开在 200 字节处截断](IMS/2026-09-03_VoWiFi_UNISOC_41903_PRF密钥展开截断导致IKE_AUTH解密失败.md) | IMS | UNISOC | IMS / SIP | Modem/IKE/Crypto/IMS | high | open | F:/Log/A01/A01_VOWIFI/2026-09-03-10-47-15_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-03-17-33-50_REF_41903 VOWIFI | IKE_SA_INIT 后生成的 SK_er 仅前 20/32 字节有效，后 12 字节为 0；SK_pi/SK_pr 全 0，密钥展开恰在累计 200 字节处停止 |
+| [UNISOC 41903 VoWiFi 注册失败：IKE PRF+ 密钥展开在 200 字节处截断](IMS/2026-09-03_VoWiFi_UNISOC_41903_PRF密钥展开截断导致IKE_AUTH解密失败.md) | IMS | UNISOC | IMS / SIP | Modem/IKE/Crypto/IMS | high | closed | F:/Log/A01/A01_VOWIFI/2026-09-03-10-47-15_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-03-17-33-50_REF_41903 VOWIFI; F:/Log/A01/A01_VOWIFI/2026-09-05-13-30-32_DUT_41903_VOWIFI | IKE_SA_INIT 后生成的 SK_er 仅前 20/32 字节有效，后 12 字节为 0；SK_pi/SK_pr 全 0，密钥展开恰在累计 200 字节处停止 |
 | [CM52在宁波实验室测试，待机功耗高](Registration/Imported_Registration_09_CM52在宁波实验室测试_待机功耗高.md) | Registration | MTK | Call / SS / ECC | 'Modem/NWSEL/Power' | high | summarized | 'Old Outline knowledge base; split from 注网问题案例补充.md' | '无支持 ECC 小区时 modem 持续搜网，合入降低紧急搜网频率 patch 后功耗下降' |
 | [2026-05-14 MTK LTE开机注册成功](Registration/2026-05-14_Registration_MTK_LTE开机注册成功.md) | Registration | MTK | Data / APN / ESM | AP/Modem/Network | high | closed | 'F:\Log\流程Log\MTKLte注册流程\debuglogger' | none |
 | [MP6漫游失败](Registration/Imported_Registration_05_MP6漫游失败.md) | Registration | MTK | Data / APN / ESM | APN/Modem/Network | medium | summarized | Old Outline knowledge base; split from 注网问题案例补充.md | AT +EGREG 已显示 roaming 注册成功，但打开漫游后仍无 PDP 请求，首坏点转为 APN 匹配 |
