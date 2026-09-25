@@ -240,26 +240,26 @@ Attach Accept建议记录：
 
 `Attach Reject` 和 `TAU Reject` 都是NAS EMM层拒绝，区别在于前者发生在初始注册，后者发生在已经注册后的TA更新、周期TAU或回网更新。定位时不要只记录“被拒”，至少要同步记录：`PLMN`、`TAC/TAI`、`GUTI/IMSI/IMEI`、reject cause、是否写入 `FPLMN`/forbidden TA、是否启动退避定时器，以及后续是继续搜网、换RAT、还是停在无服务。
 
-| Cause | 常见消息 | 快速含义 | 第一优先排查 |
-|---|---|---|---|
-| `#2 IMSI unknown in HSS` | Attach Reject | HSS/核心网不认识该IMSI | SIM签约、开户状态、HSS/HLR数据 |
-| `#3 Illegal UE` | Attach/TAU Reject | 网络认为UE非法 | 签约、SIM状态、运营商侧限制 |
-| `#5 IMEI not accepted` | Attach Reject | IMEI未被网络接受 | IMEI备案、白名单、设备库 |
-| `#6 Illegal ME` | Attach Reject | 设备非法，常见于IMEI不合法或未备案 | IMEI、运营商设备准入、样机/工程机策略 |
-| `#7 EPS services not allowed` | Attach/TAU Reject | EPS业务不允许 | SIM是否开通LTE/EPS、套餐与核心网配置 |
-| `#8 EPS and non-EPS services not allowed` | Attach Reject | EPS和非EPS都不允许 | SIM/账号状态、欠费、停机、HLR/HSS配置 |
-| `#9 UE identity cannot be derived` | Attach/TAU Reject | 网络无法从旧标识恢复UE身份 | GUTI/TMSI失效，复测是否转IMSI attach |
-| `#10 Implicitly detached` | TAU Reject | 网络侧认为UE已经隐式分离 | 触发重新attach，查长时间OOS/核心网上下文丢失 |
-| `#11 PLMN not allowed` | Attach/TAU Reject | 当前PLMN不允许 | FPLMN、漫游协议、SIM PLMN列表 |
-| `#12 Tracking Area not allowed` | Attach/TAU Reject | 当前TA不允许 | forbidden TA list、TAC、区域签约 |
-| `#13 Roaming not allowed in this tracking area` | Attach/TAU Reject | 当前TA漫游不允许 | 漫游开关、漫游协议、TA限制 |
-| `#14 EPS services not allowed in this PLMN` | Attach/TAU Reject | 此PLMN不允许EPS | LTE签约、漫游LTE开通、PLMN策略 |
-| `#15 No suitable cells in tracking area` | Attach/TAU Reject | 当前TA没有适合该UE的小区 | TAC限制、重选/换TA、禁用TA记录 |
-| `#17 Network failure` | Attach/TAU Reject | 网络侧临时异常或策略拒绝 | 重试计数、是否换PLMN/RAT、运营商侧告警 |
-| `#19 ESM failure` | Attach Reject | ESM默认承载/PDN流程失败导致Attach失败 | 转到“ESM / 默认承载失败专项” |
-| `#22 Congestion` | Attach/TAU Reject | 网络拥塞 | T3346/退避、是否按规范停止重试 |
-| `#25 Not authorized for this CSG` | Attach/TAU Reject | CSG小区无权限 | CSG白名单、小区类型、SIM授权 |
-| `#40 No EPS bearer context activated` | TAU Reject/Service | 网络侧无可用EPS bearer上下文 | 重新attach、默认承载是否曾建立/丢失 |
+| Cause                                           | 常见消息               | 快速含义                      | 第一优先排查                       |
+| ----------------------------------------------- | ------------------ | ------------------------- | ---------------------------- |
+| `#2 IMSI unknown in HSS`                        | Attach Reject      | HSS/核心网不认识该IMSI           | SIM签约、开户状态、HSS/HLR数据         |
+| `#3 Illegal UE`                                 | Attach/TAU Reject  | 网络认为UE非法                  | 签约、SIM状态、运营商侧限制              |
+| `#5 IMEI not accepted`                          | Attach Reject      | IMEI未被网络接受                | IMEI备案、白名单、设备库               |
+| `#6 Illegal ME`                                 | Attach Reject      | 设备非法，常见于IMEI不合法或未备案       | IMEI、运营商设备准入、样机/工程机策略        |
+| `#7 EPS services not allowed`                   | Attach/TAU Reject  | EPS业务不允许                  | SIM是否开通LTE/EPS、套餐与核心网配置      |
+| `#8 EPS and non-EPS services not allowed`       | Attach Reject      | EPS和非EPS都不允许              | SIM/账号状态、欠费、停机、HLR/HSS配置     |
+| `#9 UE identity cannot be derived`              | Attach/TAU Reject  | 网络无法从旧标识恢复UE身份            | GUTI/TMSI失效，复测是否转IMSI attach |
+| `#10 Implicitly detached`                       | TAU Reject         | 网络侧认为UE已经隐式分离             | 触发重新attach，查长时间OOS/核心网上下文丢失  |
+| `#11 PLMN not allowed`                          | Attach/TAU Reject  | 当前PLMN不允许                 | FPLMN、漫游协议、SIM PLMN列表        |
+| `#12 Tracking Area not allowed`                 | Attach/TAU Reject  | 当前TA不允许                   | forbidden TA list、TAC、区域签约   |
+| `#13 Roaming not allowed in this tracking area` | Attach/TAU Reject  | 当前TA漫游不允许                 | 漫游开关、漫游协议、TA限制               |
+| `#14 EPS services not allowed in this PLMN`     | Attach/TAU Reject  | 此PLMN不允许EPS               | LTE签约、漫游LTE开通、PLMN策略         |
+| `#15 No suitable cells in tracking area`        | Attach/TAU Reject  | 当前TA没有适合该UE的小区            | TAC限制、重选/换TA、禁用TA记录          |
+| `#17 Network failure`                           | Attach/TAU Reject  | 网络侧临时异常或策略拒绝              | 重试计数、是否换PLMN/RAT、运营商侧告警      |
+| `#19 ESM failure`                               | Attach Reject      | ESM默认承载/PDN流程失败导致Attach失败 | 转到“ESM / 默认承载失败专项”           |
+| `#22 Congestion`                                | Attach/TAU Reject  | 网络拥塞                      | T3346/退避、是否按规范停止重试           |
+| `#25 Not authorized for this CSG`               | Attach/TAU Reject  | CSG小区无权限                  | CSG白名单、小区类型、SIM授权            |
+| `#40 No EPS bearer context activated`           | TAU Reject/Service | 网络侧无可用EPS bearer上下文       | 重新attach、默认承载是否曾建立/丢失        |
 
 判断口径：
 
